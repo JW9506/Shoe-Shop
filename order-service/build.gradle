@@ -8,6 +8,8 @@ ext {
 	set('springCloudVersion', "2023.0.0")
     jedisVersion = '3.6.0'
     lombokVersion = '1.18.20'
+    hibernateVersion = '6.2.0.Final'
+    validationApiVersion = '2.0.1.Final'
 }
 
 java {
@@ -30,6 +32,8 @@ repositories {
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateVersion}"
+    implementation "javax.validation:validation-api:${validationApiVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
