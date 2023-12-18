@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.plantshop'
+version = '0.0.1-SNAPSHOT'
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    // Common configuration for all subprojects
+    apply plugin: 'java'
+
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    dependencies {
+        // Common dependencies (if any)
+    }
+}
