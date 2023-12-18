@@ -1,16 +1,13 @@
 package foo.bar.domain.member.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import foo.bar.response.BaseResponse;
 
-@RequestMapping("/api/hello")
-@RestController
+@Controller
 public class MemberController {
-    @GetMapping("/foo")
-    public BaseResponse checkEmail() throws Exception {
-        throw new Exception("this is an exception");
-        // return new BaseResponse(SIGNUP);
+
+    @GetMapping("/api/v1/hello")
+    public String Hello() throws Exception {
+        return "OK";
     }
 }
