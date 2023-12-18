@@ -5,11 +5,9 @@ plugins {
 }
 
 ext {
-	set('springCloudVersion', "2023.0.0")
-    jedisVersion = '3.6.0'
+	springCloudVersion = '2023.0.0'
     lombokVersion = '1.18.20'
-    hibernateVersion = '6.2.0.Final'
-    validationApiVersion = '2.0.1.Final'
+    h2Version = '2.1.214'
 }
 
 java {
@@ -32,8 +30,10 @@ repositories {
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-aop"
-    implementation "org.hibernate.validator:hibernate-validator:${hibernateVersion}"
-    implementation "javax.validation:validation-api:${validationApiVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly "com.h2database:h2:${h2Version}"
+
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
