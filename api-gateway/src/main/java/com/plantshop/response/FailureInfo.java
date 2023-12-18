@@ -1,4 +1,4 @@
-package foo.bar.response;
+package com.plantshop.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

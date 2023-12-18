@@ -1,11 +1,11 @@
-package foo.bar.exception;
+package com.plantshop.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import foo.bar.response.BaseResponse;
-import foo.bar.response.FailureInfo;
+import com.plantshop.response.BaseResponse;
+import com.plantshop.response.FailureInfo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

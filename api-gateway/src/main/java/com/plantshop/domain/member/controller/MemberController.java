@@ -1,4 +1,4 @@
-package foo.bar.domain.member.controller;
+package com.plantshop.domain.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
