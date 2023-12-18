@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum SuccessInfo {
-    SIGNUP("sign up");
+    SIGN_UP("SIGN UP"),
+    GET_ORDER("GET ORDER");
 
     private final String code = "1";
     private final String message;
