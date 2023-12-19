@@ -1,8 +1,9 @@
 package com.shoeshop.controller;
 
+import static com.shoeshop.response.SuccessInfo.*;
 import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
-import static com.shoeshop.response.SuccessInfo.GET_ORDER;
-import static com.shoeshop.response.SuccessInfo.POST_ORDER;
+import java.io.IOException;
+import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shoeshop.dto.OrderCreationDto;
 import com.shoeshop.dto.OrderDto;
 import com.shoeshop.exceptions.EntityNotFoundException;
+import com.shoeshop.order.model.ProductDto;
 import com.shoeshop.response.DataResponse;
 import com.shoeshop.service.OrderService;
+import com.shoeshop.service.ProductServiceClient;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/order")
 public class OrderController {
     private final OrderService orderService;
+    private final ProductServiceClient productServiceClient;
 
     @GetMapping("/{id}")
     public DataResponse<OrderDto> getOrder(@PathVariable("id") Long id) {
@@ -44,5 +48,11 @@ public class OrderController {
         OrderDto order = orderService.createOrder(orderCreationDto);
 
         return new DataResponse<>(POST_ORDER, order);
+    }
+
+    @GetMapping("/allproducts")
+    public DataResponse<List<ProductDto>> getProducts() throws IOException, InterruptedException {
+        List<ProductDto> allProducts = productServiceClient.getAllProducts();
+        return new DataResponse<>(GET_PRODUCTS, allProducts);
     }
 }

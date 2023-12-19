@@ -34,7 +34,7 @@ public class ProductController {
         return new DataResponse<>(CREATE_PRODUCT, productDto);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @Operation(summary = "Get all product")
     public DataResponse<List<ProductDto>> getAllProduct() {
         List<ProductDto> productDtos = productService.getAllProduct();

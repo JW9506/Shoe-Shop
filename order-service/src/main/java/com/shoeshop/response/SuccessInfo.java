@@ -10,7 +10,8 @@ public enum SuccessInfo {
     GET_ORDER("GET ORDER"),
     POST_ORDER("POST ORDER"),
 
-    GET_CUSTOMER("GET CUSTOMER");
+    GET_CUSTOMER("GET CUSTOMER"),
+    GET_PRODUCTS("GET PRODUCTS");
 
     private final String code = "1";
     private final String message;
