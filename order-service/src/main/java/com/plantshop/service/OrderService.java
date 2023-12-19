@@ -23,7 +23,8 @@ public class OrderService {
 
     @Transactional
     public OrderDto getOrder(Long id) {
-        Order o = orderRepository.findOrderById(id).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
+        Order o = orderRepository.findOrderById(id)
+                .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         Customer c = customerRepository.findCustomerById(o.getCustomer().getId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         OrderDto orderDto = OrderDto.from(o);
@@ -36,10 +37,10 @@ public class OrderService {
         Customer c = customerRepository.findCustomerById(orderCreationDto.getCustomerId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         Order newOrder = Order.builder() //
-                            .orderDetails(orderCreationDto.getOrderDetails()) //
-                            .paymentStatus(UNPAID) //
-                            .customer(c) //
-                            .build();
+                .orderDetails(orderCreationDto.getOrderDetails()) //
+                .paymentStatus(UNPAID) //
+                .customer(c) //
+                .build();
         orderRepository.save(newOrder);
         return OrderDto.from(newOrder);
     }
