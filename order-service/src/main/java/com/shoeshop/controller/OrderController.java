@@ -1,7 +1,7 @@
 package com.shoeshop.controller;
 
 import static com.shoeshop.response.SuccessInfo.*;
-import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
+import static com.shoeshop.response.FailureInfo.*;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shoeshop.dto.OrderCreationDto;
 import com.shoeshop.dto.OrderDto;
 import com.shoeshop.exceptions.EntityNotFoundException;
+import com.shoeshop.exceptions.GlobalException;
 import com.shoeshop.order.model.ProductDto;
 import com.shoeshop.response.DataResponse;
 import com.shoeshop.service.OrderService;
@@ -36,9 +37,14 @@ public class OrderController {
         return new DataResponse<>(GET_ORDER, order);
     }
 
-    @GetMapping("/throw")
-    public DataResponse<String> throwError() {
+    @GetMapping("/throw1")
+    public DataResponse<String> throwError1() {
         throw new EntityNotFoundException(INVALID_INPUT);
+    }
+
+    @GetMapping("/throw2")
+    public DataResponse<String> throwError2() {
+        throw new GlobalException(INTERNAL_SERVER_ERROR);
     }
 
     @PostMapping
