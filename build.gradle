@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.plantshop'
+group = 'com.shoeshop'
 version = '0.0.1-SNAPSHOT'
 
 allprojects {

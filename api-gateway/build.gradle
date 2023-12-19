@@ -18,7 +18,7 @@ java {
     sourceCompatibility = '17'
 }
 
-group = 'plantshop'
+group = 'shoeshop'
 version = '0.0.1-SNAPSHOT'
 
 configurations {

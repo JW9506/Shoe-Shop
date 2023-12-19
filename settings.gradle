@@ -1,4 +1,4 @@
-rootProject.name = 'plant shop'
+rootProject.name = 'shoe shop'
 
 include 'api-gateway'
 include 'order-service'
