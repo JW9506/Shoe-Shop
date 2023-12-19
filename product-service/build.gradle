@@ -1,17 +1,11 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.0'
-    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 ext {
-	springCloudVersion = '2023.0.0'
     lombokVersion = '1.18.20'
     h2Version = '2.1.214'
-}
-
-java {
-    sourceCompatibility = '17'
 }
 
 group = 'com.shoeshop'
@@ -29,6 +23,7 @@ repositories {
 
 dependencies {
     // implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
