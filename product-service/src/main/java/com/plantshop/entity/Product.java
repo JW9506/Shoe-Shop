@@ -25,7 +25,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productId;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;
@@ -37,6 +37,6 @@ public class Product {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "parent_category_id", nullable = false)
     private Category category;
 }

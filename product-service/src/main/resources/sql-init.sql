@@ -11,6 +11,7 @@ create table t_categories (
 create table t_product (
     id int AUTO_INCREMENT primary key,
     parent_category_id int not null,
+    name varchar(255) not null,
     description text,
     price DECIMAL(10, 2),
     created_at TIMESTAMP,
@@ -30,3 +31,6 @@ INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Mens R
 INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Womens Road Running', 'Road running shoes for women', (SELECT category_id FROM t_categories WHERE name = 'Road Running'));
 INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Mens Trail Running', 'Trail running shoes for men', (SELECT category_id FROM t_categories WHERE name = 'Trail Running'));
 INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Womens Trail Running', 'Trail running shoes for women', (SELECT category_id FROM t_categories WHERE name = 'Trail Running'));
+
+insert into t_product (parent_category_id, name, description, price) values (4, 'Nike', 'Super fast Nike', 23.99);
+insert into t_product (parent_category_id, name, description, price) values (3, 'Adidas', 'Super fast Adidas', 13.99);

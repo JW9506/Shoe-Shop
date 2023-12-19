@@ -9,9 +9,7 @@ import com.plantshop.dto.CustomerDto;
 import com.plantshop.response.DataResponse;
 import com.plantshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/customer")

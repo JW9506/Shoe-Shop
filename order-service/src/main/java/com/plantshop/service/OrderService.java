@@ -19,7 +19,6 @@ import static com.plantshop.enums.PaymentStatus.*;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
-    private final CustomerService customerService;
 
     @Transactional
     public OrderDto getOrder(Long id) {
