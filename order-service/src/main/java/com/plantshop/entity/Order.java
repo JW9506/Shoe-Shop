@@ -1,8 +1,11 @@
 package com.plantshop.entity;
 
 import com.plantshop.AuditEntity;
+import com.plantshop.enums.PaymentStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,4 +38,8 @@ public class Order extends AuditEntity {
 
     @Column(name = "details")
     private String orderDetails;
+
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 }

@@ -12,6 +12,7 @@ import com.plantshop.exceptions.EntityNotFoundException;
 import com.plantshop.repository.CustomerRepository;
 import com.plantshop.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import static com.plantshop.enums.PaymentStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +35,11 @@ public class OrderService {
     public OrderDto createOrder(OrderCreationDto orderCreationDto) {
         Customer c = customerRepository.findCustomerById(orderCreationDto.getCustomerId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        Order newOrder = Order.builder().orderDetails(orderCreationDto.getOrderDetails())
-                .customer(c).build();
+        Order newOrder = Order.builder() //
+                            .orderDetails(orderCreationDto.getOrderDetails()) //
+                            .paymentStatus(UNPAID) //
+                            .customer(c) //
+                            .build();
         orderRepository.save(newOrder);
         return OrderDto.from(newOrder);
     }
