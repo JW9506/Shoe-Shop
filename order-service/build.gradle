@@ -34,6 +34,29 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
+// OpenAPI Generator configuration
+openApiGenerate {
+    generatorName = 'java'
+    inputSpec = 'http://localhost:8082/v3/api-docs'  // URL of your product-service's OpenAPI spec
+    outputDir = "$buildDir/generated-sources/openapi"
+    apiPackage = 'com.shoeshop.order.api'  // Package for API classes
+    modelPackage = 'com.shoeshop.order.model'  // Package for model classes
+    invokerPackage = 'com.shoeshop.order.invoker'  // Package for invoker classes
+    configOptions = [
+        dateLibrary: 'java8'  // Use java8 date types
+    ]
+}
+
+compileJava.dependsOn tasks.named("openApiGenerate")
+
+sourceSets {
+    main {
+        java {
+            srcDir "$buildDir/generated-sources/openapi/src/main/java"
+        }
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
