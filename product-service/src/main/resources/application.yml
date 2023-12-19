@@ -23,3 +23,10 @@ spring:
 
 server:
   port: 8082
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8091/eureka/

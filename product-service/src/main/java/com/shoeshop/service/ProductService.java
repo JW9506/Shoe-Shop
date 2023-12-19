@@ -1,5 +1,6 @@
 package com.shoeshop.service;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 import com.shoeshop.dto.ProductCreateDto;
 import com.shoeshop.dto.ProductDto;
@@ -26,5 +27,9 @@ public class ProductService {
                 .build();
         p = productRepository.save(p);
         return ProductDto.from(p);
+    }
+
+    public List<ProductDto> getAllProduct() {
+        return productRepository.findAll().stream().map(ProductDto::from).toList();
     }
 }
