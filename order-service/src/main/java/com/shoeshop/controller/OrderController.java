@@ -2,7 +2,6 @@ package com.shoeshop.controller;
 
 import static com.shoeshop.response.SuccessInfo.*;
 import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
-import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +50,7 @@ public class OrderController {
     }
 
     @GetMapping("/allproducts")
-    public DataResponse<List<ProductDto>> getProducts() throws IOException, InterruptedException {
+    public DataResponse<List<ProductDto>> getProducts() {
         List<ProductDto> allProducts = productServiceClient.getAllProducts();
         return new DataResponse<>(GET_PRODUCTS, allProducts);
     }
