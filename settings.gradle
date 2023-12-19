@@ -2,3 +2,4 @@ rootProject.name = 'plant shop'
 
 include 'api-gateway'
 include 'order-service'
+include 'product-service'
