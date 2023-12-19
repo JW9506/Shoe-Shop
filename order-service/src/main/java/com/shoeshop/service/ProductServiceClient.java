@@ -21,7 +21,9 @@ import com.shoeshop.exceptions.GlobalException;
 import com.shoeshop.order.model.ProductDto;
 import com.shoeshop.response.APIResponseWrapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class ProductServiceClient {
@@ -41,7 +43,9 @@ public class ProductServiceClient {
     }
 
     public List<ProductDto> getAllProducts() {
-        String url = productServiceUrl() + "/api/product/all";
+        String url = productServiceUrl();
+        log.info("Product Service Url: {}", url);
+        url += productServiceProperties.getAllProducts();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
         try {

@@ -9,5 +9,6 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "microservice.product-service")
 public class ProductServiceProperties {
     private String url;
+    private String allProducts;
 }
 
