@@ -21,14 +21,7 @@ public class CustomerService {
 
         Customer c = customerRepository.findCustomerById(id)
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        return toDto(c);
+        return CustomerDto.from(c);
         
-    }
-
-    CustomerDto toDto(Customer c) {
-        return CustomerDto.builder()
-                .name(c.getName())
-                .email(c.getEmail())
-                .build();
     }
 }

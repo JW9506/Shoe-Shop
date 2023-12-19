@@ -1,5 +1,6 @@
 package com.plantshop.dto;
 
+import com.plantshop.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,12 @@ public class CustomerDto {
 
     private String name;
     private String email;
+
+    public static CustomerDto from(Customer c) {
+        return CustomerDto.builder() //
+                .name(c.getName()) //
+                .email(c.getEmail()) //
+                .build();
+    }
+
 }

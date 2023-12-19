@@ -3,6 +3,7 @@ package com.plantshop.service;
 import static com.plantshop.response.FailureInfo.INVALID_INPUT;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.plantshop.dto.CustomerDto;
 import com.plantshop.dto.OrderCreationDto;
 import com.plantshop.dto.OrderDto;
 import com.plantshop.entity.Customer;
@@ -24,8 +25,8 @@ public class OrderService {
         Order o = orderRepository.findOrderById(id);
         Customer c = customerRepository.findCustomerById(o.getCustomer().getId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        OrderDto orderDto = toDto(o);
-        orderDto.setCustomer(customerService.toDto(c));
+        OrderDto orderDto = OrderDto.from(o);
+        orderDto.setCustomer(CustomerDto.from(c));
         return orderDto;
     }
 
@@ -36,16 +37,6 @@ public class OrderService {
         Order newOrder = Order.builder().orderDetails(orderCreationDto.getOrderDetails())
                 .customer(c).build();
         orderRepository.save(newOrder);
-        return toDto(newOrder);
-    }
-
-    OrderDto toDto(Order order) {
-        return OrderDto.builder() //
-                .id(order.getId()) //
-                .customer(customerService.toDto(order.getCustomer())) //
-                .orderDetails(order.getOrderDetails()) //
-                .createdAt(order.getCreatedAt()) //
-                .updatedAt(order.getUpdatedAt()) //
-                .build();
+        return OrderDto.from(newOrder);
     }
 }
