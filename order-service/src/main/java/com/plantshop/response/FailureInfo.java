@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum FailureInfo {
 
-    INVALID_INPUT("98", "Invalid input"),
-    INTERNAL_SERVER_ERROR("500", "Invalid input");
+    INVALID_INPUT("98", "INVALID_INPUT"),
+    INTERNAL_SERVER_ERROR("500", "INTERNAL_SERVER_ERROR");
 
     private final String code;
     private final String message;

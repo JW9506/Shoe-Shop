@@ -1,5 +1,6 @@
 package com.plantshop.controller;
 
+import static com.plantshop.response.FailureInfo.INVALID_INPUT;
 import static com.plantshop.response.SuccessInfo.GET_ORDER;
 import static com.plantshop.response.SuccessInfo.POST_ORDER;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.plantshop.dto.OrderCreationDto;
 import com.plantshop.dto.OrderDto;
+import com.plantshop.exceptions.EntityNotFoundException;
 import com.plantshop.response.DataResponse;
 import com.plantshop.service.OrderService;
 import jakarta.validation.Valid;
@@ -29,6 +31,11 @@ public class OrderController {
         OrderDto order = orderService.getOrder(id);
         log.info("{}", order);
         return new DataResponse<>(GET_ORDER, order);
+    }
+
+    @GetMapping("/throw")
+    public DataResponse<String> throwError() {
+        throw new EntityNotFoundException(INVALID_INPUT);
     }
 
     @PostMapping
