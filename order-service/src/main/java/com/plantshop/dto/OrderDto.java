@@ -1,5 +1,6 @@
 package com.plantshop.dto;
 
+import java.time.LocalDateTime;
 import com.plantshop.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,8 +18,8 @@ public class OrderDto {
     private Long id;
     private String orderDetails;
     private CustomerDto customer;
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public static OrderDto from(Order order) {
         return OrderDto.builder() //

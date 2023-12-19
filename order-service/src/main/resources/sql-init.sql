@@ -4,15 +4,15 @@ create table t_customer (
   name varchar(255) not null,
   city varchar(255) not null,
   email varchar(255) not null,
-  created_at date,
-  updated_at date
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
 );
 create table t_order (
   id int AUTO_INCREMENT primary key,
   customer_id int not null,
   details varchar(255) not null,
-  created_at date,
-  updated_at date,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
   foreign key (customer_id) references t_customer(id)
 );
 

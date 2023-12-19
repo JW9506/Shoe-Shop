@@ -22,7 +22,7 @@ public class OrderService {
 
     @Transactional
     public OrderDto getOrder(Long id) {
-        Order o = orderRepository.findOrderById(id);
+        Order o = orderRepository.findOrderById(id).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         Customer c = customerRepository.findCustomerById(o.getCustomer().getId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         OrderDto orderDto = OrderDto.from(o);
