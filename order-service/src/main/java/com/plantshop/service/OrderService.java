@@ -17,14 +17,15 @@ import lombok.RequiredArgsConstructor;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
+    private final CustomerService customerService;
 
     @Transactional
     public OrderDto getOrder(Long id) {
         Order o = orderRepository.findOrderById(id);
         Customer c = customerRepository.findCustomerById(o.getCustomer().getId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        o.setCustomer(c);
         OrderDto orderDto = toDto(o);
+        orderDto.setCustomer(customerService.toDto(c));
         return orderDto;
     }
 
@@ -41,8 +42,10 @@ public class OrderService {
     OrderDto toDto(Order order) {
         return OrderDto.builder() //
                 .id(order.getId()) //
-                .customer(order.getCustomer()) //
+                .customer(customerService.toDto(order.getCustomer())) //
                 .orderDetails(order.getOrderDetails()) //
+                .createdAt(order.getCreatedAt()) //
+                .updatedAt(order.getUpdatedAt()) //
                 .build();
     }
 }

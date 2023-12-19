@@ -1,5 +1,6 @@
 package com.plantshop.entity;
 
+import com.plantshop.AuditEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Entity
 @Builder
 @Table(name = "t_order")
-public class Order {
+public class Order extends AuditEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

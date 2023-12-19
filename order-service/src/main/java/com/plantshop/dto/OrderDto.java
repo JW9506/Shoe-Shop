@@ -1,6 +1,5 @@
 package com.plantshop.dto;
 
-import com.plantshop.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +14,8 @@ import lombok.ToString;
 public class OrderDto {
 
     private Long id;
-
     private String orderDetails;
-
-    private Customer customer;
+    private CustomerDto customer;
+    private String createdAt;
+    private String updatedAt;
 }
