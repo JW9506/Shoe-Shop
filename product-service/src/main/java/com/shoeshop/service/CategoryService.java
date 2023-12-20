@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.shoeshop.dto.CategoryDto;
 import com.shoeshop.dto.CategoryNode;
+import com.shoeshop.dto.ProductDto;
 import com.shoeshop.entity.Category;
+import com.shoeshop.entity.Product;
 import com.shoeshop.exceptions.EntityNotFoundException;
 import com.shoeshop.repository.CategoryRepository;
+import com.shoeshop.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Transactional
     public CategoryDto getCategory(Long id) {
@@ -62,6 +67,14 @@ public class CategoryService {
             }
         }
         return root.getSubcategories();
+    }
+
+    public List<ProductDto> getProductsByCategory(Long categoryId) {
+        // Fetch products by category ID
+        List<Product> productDtos = productRepository.findByCategoryId(categoryId).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
+        return productDtos.stream()
+                       .map(ProductDto::from)
+                       .collect(Collectors.toList());
     }
 
 }
