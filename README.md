@@ -16,6 +16,14 @@ Get "/api/product/all"
 Get "/api/categories"
 Get "/api/categories/hierarchical"
 Get "/api/categories/{categoryId}/products"
+
+Post /api/order
+    request body {
+        Long customerId
+        String orderDetails
+    }
+Get  /api/order/{id}
+Get  /api/order/allproducts
 ```
 
 ```bash
