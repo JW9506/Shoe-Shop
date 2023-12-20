@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.shoeshop.dto.OrderCreationDto;
+import com.shoeshop.dto.OrderCreateDto;
 import com.shoeshop.dto.OrderDto;
 import com.shoeshop.exceptions.EntityNotFoundException;
 import com.shoeshop.exceptions.GlobalException;
@@ -58,7 +58,7 @@ public class OrderController {
 
     @PostMapping
     @Operation(summary = "Create Order")
-    public DataResponse<OrderDto> postOrder(@Valid @RequestBody OrderCreationDto orderCreationDto) {
+    public DataResponse<OrderDto> postOrder(@Valid @RequestBody OrderCreateDto orderCreationDto) {
         log.info("post order: {}", orderCreationDto);
         OrderDto order = orderService.createOrder(orderCreationDto);
 

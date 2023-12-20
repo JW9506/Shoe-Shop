@@ -4,7 +4,7 @@ import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.shoeshop.dto.CustomerDto;
-import com.shoeshop.dto.OrderCreationDto;
+import com.shoeshop.dto.OrderCreateDto;
 import com.shoeshop.dto.OrderDto;
 import com.shoeshop.entity.Customer;
 import com.shoeshop.entity.Order;
@@ -32,7 +32,7 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderDto createOrder(OrderCreationDto orderCreationDto) {
+    public OrderDto createOrder(OrderCreateDto orderCreationDto) {
         Customer c = customerRepository.findCustomerById(orderCreationDto.getCustomerId())
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         Order newOrder = Order.builder() //

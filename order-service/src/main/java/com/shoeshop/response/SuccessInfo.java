@@ -12,7 +12,8 @@ public enum SuccessInfo {
 
     GET_CUSTOMER("GET CUSTOMER"),
     GET_PRODUCTS("GET PRODUCTS"),
-    GET_HIERARCHICAL_CATEGORIES("GET HIERARCHICAL CATEGORIES");
+    GET_HIERARCHICAL_CATEGORIES("GET HIERARCHICAL CATEGORIES"),
+    POST_CART_ITEM("POST CART ITEM");
 
     private final String code = "1";
     private final String message;

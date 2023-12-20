@@ -24,9 +24,9 @@ public class Cart extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "customer_id")
-    private Integer customerId;
+    private Long customerId;
 }
 

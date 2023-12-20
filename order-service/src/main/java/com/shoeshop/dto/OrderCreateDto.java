@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class OrderCreationDto {
+public class OrderCreateDto {
 
     private Long customerId;
     private String orderDetails;

@@ -25,18 +25,18 @@ public class CartItem extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "customer_id")
-    private Integer customerId;
+    private Long customerId;
 
     @Column(name = "product_id")
-    private Integer productId;
+    private Long productId;
 
     @Column(name = "cart_id")
-    private Integer cartId;
+    private Long cartId;
 
-    private Integer quantity;
+    private Long quantity;
 
     @Column(name = "total_price")
     private BigDecimal totalPrice;
