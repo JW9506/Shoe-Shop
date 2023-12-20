@@ -26,6 +26,9 @@ Get  /api/order/{id}
 Get  /api/order/allproducts
 ```
 
+Key highlight:
+`Get  /api/order/allproducts` fetches from the `product-service` module, using eureka for client discovery and HttpClient to make Http Get request for all products, show casing cross module communication.
+
 View the project in minified view:
 
 ```bash
