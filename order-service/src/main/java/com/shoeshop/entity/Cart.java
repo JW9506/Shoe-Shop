@@ -1,6 +1,5 @@
 package com.shoeshop.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.shoeshop.AuditEntity;
 import jakarta.persistence.CascadeType;
