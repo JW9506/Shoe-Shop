@@ -30,6 +30,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
+    @Operation(summary = "Create Product")
     public DataResponse<ProductDto> createProduct(
             @Valid @RequestBody ProductCreateDto productCreateDto) {
         ProductDto productDto = productService.createProduct(productCreateDto);
@@ -38,6 +39,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Product")
     public DataResponse<ProductDto> deleteProduct(@PathVariable Long id) {
         ProductDto productDto = productService.deleteProduct(id);
         log.info("Deleting product.");
