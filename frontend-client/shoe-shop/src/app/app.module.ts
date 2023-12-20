@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductListModule } from './feature/product-list/product-list.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     MatButtonModule,
     MatCheckboxModule,
+    ProductListModule,
     BrowserAnimationsModule
   ],
   providers: [],
