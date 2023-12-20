@@ -27,9 +27,6 @@ public class CartItem extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "customer_id")
-    private Long customerId;
-
     @Column(name = "product_id")
     private Long productId;
 

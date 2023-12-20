@@ -27,14 +27,12 @@ CREATE TABLE t_cart (
 
 CREATE TABLE t_cartitem (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  customer_id INT,
   product_id INT,
   cart_id INT,
   quantity INT,
   total_price DECIMAL(10, 2),
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
-  FOREIGN KEY (customer_id) REFERENCES t_customer(id),
   FOREIGN KEY (product_id) REFERENCES t_order(id),
   FOREIGN KEY (cart_id) REFERENCES t_cart(id)
 );
@@ -58,7 +56,7 @@ insert into t_cart (customer_id, created_at, updated_at) values (1, '2023-07-01 
 insert into t_cart (customer_id, created_at, updated_at) values (2, '2023-07-01 11:00:00', '2023-07-01 11:00:00');
 insert into t_cart (customer_id, created_at, updated_at) values (3, '2023-07-01 12:00:00', '2023-07-01 12:00:00');
 
-insert into t_cartitem (customer_id, product_id, cart_id, quantity, total_price, created_at, updated_at) values (1, 1, 1, 2, 100.00, '2023-07-01 10:05:00', '2023-07-01 10:05:00');
-insert into t_cartitem (customer_id, product_id, cart_id, quantity, total_price, created_at, updated_at) values (2, 2, 2, 1, 50.00, '2023-07-01 11:15:00', '2023-07-01 11:15:00');
-insert into t_cartitem (customer_id, product_id, cart_id, quantity, total_price, created_at, updated_at) values (3, 3, 3, 3, 150.00, '2023-07-01 12:30:00', '2023-07-01 12:30:00');
+insert into t_cartitem (product_id, cart_id, quantity, total_price, created_at, updated_at) values (1, 1, 2, 100.00, '2023-07-01 10:05:00', '2023-07-01 10:05:00');
+insert into t_cartitem (product_id, cart_id, quantity, total_price, created_at, updated_at) values (2, 2, 1, 50.00, '2023-07-01 11:15:00', '2023-07-01 11:15:00');
+insert into t_cartitem (product_id, cart_id, quantity, total_price, created_at, updated_at) values (3, 3, 3, 150.00, '2023-07-01 12:30:00', '2023-07-01 12:30:00');
 

@@ -16,7 +16,6 @@ import lombok.ToString;
 public class CartItemDto {
 
     private Long cartId;
-    private Long customerId;
     private Long productId;
     private Long quantity;
     private BigDecimal totalPrice;
@@ -24,7 +23,6 @@ public class CartItemDto {
     public static CartItemDto from(CartItem cartItem) {
         return CartItemDto.builder() //
                 .cartId(cartItem.getCartId()) //
-                .customerId(cartItem.getCustomerId()) //
                 .productId(cartItem.getProductId()) //
                 .quantity(cartItem.getQuantity()) //
                 .totalPrice(cartItem.getTotalPrice()) //
