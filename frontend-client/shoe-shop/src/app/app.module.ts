@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductListModule } from './feature/product-list/product-list.module';
 
@@ -15,8 +13,6 @@ import { ProductListModule } from './feature/product-list/product-list.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatButtonModule,
-    MatCheckboxModule,
     ProductListModule,
     BrowserAnimationsModule
   ],
