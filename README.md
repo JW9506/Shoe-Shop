@@ -29,6 +29,8 @@ Get /api/cart/{id}
 Post /api/cart/addItem
 ```
 
+Similar result can be found at `<service>/v3/api-docs`
+
 Key highlight:
 
 - `Get /api/order/allproducts` fetches from the `product-service` module, using eureka for client discovery and HttpClient to make Http Get request for all products, show casing cross module communication.
