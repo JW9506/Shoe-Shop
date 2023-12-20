@@ -22,13 +22,16 @@ Post /api/order
         Long customerId
         String orderDetails
     }
-Get  /api/order/{id}
-Get  /api/order/allproducts
+Get /api/order/{id}
+Get /api/order/allproducts
+
+Get /api/cart/{id}
+Post /api/cart/addItem
 ```
 
 Key highlight:
 
-- `Get  /api/order/allproducts` fetches from the `product-service` module, using eureka for client discovery and HttpClient to make Http Get request for all products, show casing cross module communication.
+- `Get /api/order/allproducts` fetches from the `product-service` module, using eureka for client discovery and HttpClient to make Http Get request for all products, show casing cross module communication.
 
 View the project in minified view:
 
@@ -80,13 +83,19 @@ View the project in minified view:
 |   |       |           |   |-- CurrentEnvironment.java
 |   |       |           |   `-- ProductServiceProperties.java
 |   |       |           |-- controller
+|   |       |           |   |-- CartController.java
 |   |       |           |   |-- CustomerController.java
 |   |       |           |   `-- OrderController.java
 |   |       |           |-- dto
+|   |       |           |   |-- CartCreateDto.java
+|   |       |           |   |-- CartDto.java
+|   |       |           |   |-- CartItemDto.java
 |   |       |           |   |-- CustomerDto.java
-|   |       |           |   |-- OrderCreationDto.java
+|   |       |           |   |-- OrderCreateDto.java
 |   |       |           |   `-- OrderDto.java
 |   |       |           |-- entity
+|   |       |           |   |-- Cart.java
+|   |       |           |   |-- CartItem.java
 |   |       |           |   |-- Customer.java
 |   |       |           |   `-- Order.java
 |   |       |           |-- enums
@@ -96,6 +105,8 @@ View the project in minified view:
 |   |       |           |   |-- ExceptionAdvice.java
 |   |       |           |   `-- GlobalException.java
 |   |       |           |-- repository
+|   |       |           |   |-- CartItemRepository.java
+|   |       |           |   |-- CartRepository.java
 |   |       |           |   |-- CustomerRepository.java
 |   |       |           |   `-- OrderRepository.java
 |   |       |           |-- response
@@ -105,6 +116,7 @@ View the project in minified view:
 |   |       |           |   |-- FailureInfo.java
 |   |       |           |   `-- SuccessInfo.java
 |   |       |           |-- service
+|   |       |           |   |-- CartService.java
 |   |       |           |   |-- CustomerService.java
 |   |       |           |   |-- OrderService.java
 |   |       |           |   `-- ProductServiceClient.java
@@ -159,6 +171,6 @@ View the project in minified view:
 |-- settings.gradle
 `-- this.code-workspace
 
-52 directories, 73 files
+52 directories, 82 files
 
 ```
