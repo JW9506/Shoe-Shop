@@ -53,7 +53,11 @@ public class OrderController {
     @GetMapping("/throw2")
     @Operation(summary = "Throw Test 2")
     public DataResponse<String> throwError2() {
-        throw new GlobalException(INTERNAL_SERVER_ERROR);
+        try {
+            throw new Exception("test");
+        } catch (Exception e) {
+            throw new GlobalException(INTERNAL_SERVER_ERROR, e);
+        }
     }
 
     @PostMapping

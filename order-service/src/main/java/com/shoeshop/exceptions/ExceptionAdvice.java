@@ -17,7 +17,9 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(GlobalException.class)
     protected BaseResponse globalException(GlobalException e) {
-        log.error("", e);
+        if (e.getInnerException() != null) {
+            e.getInnerException().printStackTrace();
+        }
         return new BaseResponse(e.getFailureInfo());
     }
 }

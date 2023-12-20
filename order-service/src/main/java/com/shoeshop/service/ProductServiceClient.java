@@ -63,8 +63,7 @@ public class ProductServiceClient {
 
             return productDtos;
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new GlobalException(BAD_THIRD_PARTY_ENDPOINT);
+            throw new GlobalException(BAD_THIRD_PARTY_ENDPOINT, e);
         }
     }
 
@@ -74,8 +73,7 @@ public class ProductServiceClient {
                     new TypeReference<APIResponseWrapper<T>>() {});
             return wrapper.getData();
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new GlobalException(PARSING_ERROR);
+            throw new GlobalException(PARSING_ERROR, e);
         }
     }
 }
