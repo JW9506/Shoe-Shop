@@ -1,6 +1,7 @@
 package com.shoeshop.service;
 
 import static com.shoeshop.response.FailureInfo.BAD_THIRD_PARTY_ENDPOINT;
+import static com.shoeshop.response.FailureInfo.PARSING_ERROR;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -11,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
@@ -67,12 +67,15 @@ public class ProductServiceClient {
         }
     }
 
-    private <T> T convertJsonToListOfProductDto(String jsonResponse) throws JsonMappingException, JsonProcessingException {
-        APIResponseWrapper<T> wrapper = objectMapper.readValue(jsonResponse, new TypeReference<APIResponseWrapper<T>>() {});
-        if (!wrapper.isSuccess()) {
-            throw new GlobalException(BAD_THIRD_PARTY_ENDPOINT);
+    private <T> T convertJsonToListOfProductDto(String jsonResponse) {
+        try {
+            APIResponseWrapper<T> wrapper = objectMapper.readValue(jsonResponse,
+                    new TypeReference<APIResponseWrapper<T>>() {});
+            return wrapper.getData();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new GlobalException(PARSING_ERROR);
         }
-        return wrapper.getData();
     }
 }
 
