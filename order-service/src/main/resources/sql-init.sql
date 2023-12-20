@@ -17,6 +17,48 @@ create table t_order (
   foreign key (customer_id) references t_customer(id)
 );
 
-insert into t_customer (name, city, email, created_at, updated_at) values ('jacky', 'egypt','foobar@aa.com', '2023-06-30', '2023-06-30');
-insert into t_customer (name, city, email, created_at, updated_at) values ('kacy', 'dubai' ,'foobar@aa.com', '2023-06-30', '2023-06-30');
+CREATE TABLE t_cart (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  FOREIGN KEY (customer_id) REFERENCES t_customer(id)
+);
+
+CREATE TABLE t_cartitem (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT,
+  product_id INT,
+  cart_id INT,
+  quantity INT,
+  total_price DECIMAL(10, 2),
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  FOREIGN KEY (customer_id) REFERENCES t_customer(id),
+  FOREIGN KEY (product_id) REFERENCES t_order(id),
+  FOREIGN KEY (cart_id) REFERENCES t_cart(id)
+);
+
+insert into t_customer (name, city, email, created_at, updated_at) values ('Jack', 'Egypt','Jack@example.com', '2023-06-30', '2023-06-30');
+insert into t_customer (name, city, email, created_at, updated_at) values ('Kacy', 'Dubai' ,'kacy@example.com', '2023-06-30', '2023-06-30');
+insert into t_customer (name, city, email, created_at, updated_at) values ('Alex', 'London', 'alex@example.com', '2023-06-30', '2023-06-30');
+insert into t_customer (name, city, email, created_at, updated_at) values ('Maria', 'New York', 'maria@example.com', '2023-06-30', '2023-06-30');
+insert into t_customer (name, city, email, created_at, updated_at) values ('Sofia', 'Berlin', 'sofia@example.com', '2023-06-30', '2023-06-30');
+insert into t_customer (name, city, email, created_at, updated_at) values ('Liam', 'Paris', 'liam@example.com', '2023-06-30', '2023-06-30');
+insert into t_customer (name, city, email, created_at, updated_at) values ('Emma', 'Tokyo', 'emma@example.com', '2023-06-30', '2023-06-30');
+
 insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (1, 'this is some order details', 'UNPAID', '2023-06-30', '2023-06-30');
+insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (3, 'Order for electronics', 'PAID', '2023-06-30', '2023-06-30');
+insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (4, 'Fashion items order', 'UNPAID', '2023-06-30', '2023-06-30');
+insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (5, 'Books and stationery', 'PAID', '2023-06-30', '2023-06-30');
+insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (6, 'Sports equipment purchase', 'UNPAID', '2023-06-30', '2023-06-30');
+insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (7, 'Groceries and essentials', 'PAID', '2023-06-30', '2023-06-30');
+
+insert into t_cart (customer_id, created_at, updated_at) values (1, '2023-07-01 10:00:00', '2023-07-01 10:00:00');
+insert into t_cart (customer_id, created_at, updated_at) values (2, '2023-07-01 11:00:00', '2023-07-01 11:00:00');
+insert into t_cart (customer_id, created_at, updated_at) values (3, '2023-07-01 12:00:00', '2023-07-01 12:00:00');
+
+insert into t_cartitem (customer_id, product_id, cart_id, quantity, total_price, created_at, updated_at) values (1, 1, 1, 2, 100.00, '2023-07-01 10:05:00', '2023-07-01 10:05:00');
+insert into t_cartitem (customer_id, product_id, cart_id, quantity, total_price, created_at, updated_at) values (2, 2, 2, 1, 50.00, '2023-07-01 11:15:00', '2023-07-01 11:15:00');
+insert into t_cartitem (customer_id, product_id, cart_id, quantity, total_price, created_at, updated_at) values (3, 3, 3, 3, 150.00, '2023-07-01 12:30:00', '2023-07-01 12:30:00');
+
