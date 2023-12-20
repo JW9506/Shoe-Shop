@@ -3,19 +3,19 @@ Currently, there are 4 microservices, each has its own build.gradle to declare i
 Some API to ping:
 
 ```bash
-Post "/api/product"
+Post /api/product
     request body {
         String name
         String description
         Double price
         Long parentCategoryId
     }
-Delete "/api/product/{id}"
-Get "/api/product/all"
+Delete /api/product/{id}
+Get /api/product/all
 
-Get "/api/categories"
-Get "/api/categories/hierarchical"
-Get "/api/categories/{categoryId}/products"
+Get /api/categories
+Get /api/categories/hierarchical
+Get /api/categories/{categoryId}/products
 
 Post /api/order
     request body {
