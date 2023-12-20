@@ -1,3 +1,23 @@
+Currently, there are 4 microservices, each has its own build.gradle to declare its dependencies. `order-service` calls `product-service` for product details.
+
+Some API to ping:
+
+```bash
+Post "/api/product"
+    request body {
+        String name
+        String description
+        Double price
+        Long parentCategoryId
+    }
+Delete "/api/product/{id}"
+Get "/api/product/all"
+
+Get "/api/categories"
+Get "/api/categories/hierarchical"
+Get "/api/categories/{categoryId}/products"
+```
+
 ```bash
 |-- api-gateway
 |   |-- src
