@@ -28,8 +28,9 @@ public class CartService {
     }
 
     public CartItemDto addCartItemToCart(CartItemDto cartItemDto) {
+        Cart cart = cartRepository.findById(cartItemDto.getCartId()).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         CartItem cartItem = CartItem.builder() //
-                .cartId(cartItemDto.getCartId()) //
+                .cart(cart) //
                 .productId(cartItemDto.getProductId()) //
                 .quantity(cartItemDto.getQuantity()) //
                 .totalPrice(cartItemDto.getTotalPrice()) //
@@ -41,5 +42,10 @@ public class CartService {
     public CartDto getCartById(Long id) {
         Cart cart = cartRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         return CartDto.from(cart);
+    }
+
+    public CartItemDto getCartItemById(Long id) {
+        CartItem cartItem = cartItemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
+        return CartItemDto.from(cartItem);
     }
 }

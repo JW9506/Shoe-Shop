@@ -32,7 +32,7 @@ public class Cart extends AuditEntity {
     @Column(name = "customer_id")
     private Long customerId;
 
-    @OneToMany(mappedBy = "cartId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems;
 }
 

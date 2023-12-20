@@ -1,6 +1,7 @@
 package com.shoeshop.controller;
 
 import static com.shoeshop.response.SuccessInfo.GET_CART;
+import static com.shoeshop.response.SuccessInfo.GET_CART_ITEM;
 import static com.shoeshop.response.SuccessInfo.POST_CART_ITEM;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,12 @@ public class CartController {
     public DataResponse<CartDto> getCartById(@PathVariable Long id) {
         CartDto cartDto = cartService.getCartById(id);
         return new DataResponse<CartDto>(GET_CART, cartDto);
+    }
+
+    @GetMapping("/item/{id}")
+    public DataResponse<CartItemDto> getCartItemById(@PathVariable Long id) {
+        CartItemDto cartDto = cartService.getCartItemById(id);
+        return new DataResponse<>(GET_CART_ITEM, cartDto);
     }
 
     @PostMapping("/addItem")

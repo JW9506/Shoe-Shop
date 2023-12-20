@@ -22,7 +22,7 @@ public class CartItemDto {
 
     public static CartItemDto from(CartItem cartItem) {
         return CartItemDto.builder() //
-                .cartId(cartItem.getCartId()) //
+                .cartId(cartItem.getCart().getId()) //
                 .productId(cartItem.getProductId()) //
                 .quantity(cartItem.getQuantity()) //
                 .totalPrice(cartItem.getTotalPrice()) //

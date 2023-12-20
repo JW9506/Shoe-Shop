@@ -14,7 +14,8 @@ public enum SuccessInfo {
     GET_PRODUCTS("GET PRODUCTS"),
     GET_HIERARCHICAL_CATEGORIES("GET HIERARCHICAL CATEGORIES"),
     POST_CART_ITEM("POST CART ITEM"),
-    GET_CART("GET CART");
+    GET_CART("GET CART"),
+    GET_CART_ITEM("GET CART ITEM");
 
     private final String code = "1";
     private final String message;
