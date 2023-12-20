@@ -38,6 +38,7 @@ public class ProductServiceClient {
         if (env.isDev()) {
             return productServiceProperties.getUrl();
         }
+        // TODO: secure flag should be dynamic based on env.isDev()
         InstanceInfo instance = eurekaClient.getNextServerFromEureka("product-service", false);
         return instance.getHomePageUrl();
     }

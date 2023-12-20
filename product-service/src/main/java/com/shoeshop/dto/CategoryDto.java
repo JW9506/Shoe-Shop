@@ -22,7 +22,7 @@ public class CategoryDto {
         return CategoryDto.builder() //
                 .name(category.getName()) //
                 .description(category.getDescription()) //
-                .parentCategoryId(category.getParentCategory().getCategoryId()) //
+                .parentCategoryId(category.getParentCategory() != null ? category.getParentCategory().getCategoryId() : null) //
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.shoeshop.exceptions;
 
+import static com.shoeshop.response.FailureInfo.INTERNAL_SERVER_ERROR;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.shoeshop.response.BaseResponse;
@@ -13,5 +14,11 @@ public class ExceptionAdvice {
     protected BaseResponse globalException(EntityNotFoundException e) {
         log.error("", e);
         return new BaseResponse(e.getFailureInfo());
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    protected BaseResponse nullPointerException(NullPointerException e) {
+        log.error("", e);
+        return new BaseResponse(INTERNAL_SERVER_ERROR);
     }
 }
