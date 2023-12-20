@@ -9,6 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 ext {
 	springCloudVersion = '2023.0.0'
+    gsonVersion = '2.8.9'
 }
 
 allprojects {
@@ -33,5 +34,13 @@ subprojects {
     sourceCompatibility = '17'
 
     dependencies {
+
+        // OpenAPI related fix
+        implementation 'javax.annotation:javax.annotation-api:1.3.2'
+        implementation 'com.google.code.findbugs:jsr305:3.0.2'
+        implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+        implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+        implementation "com.google.code.gson:gson:${gsonVersion}"
+        implementation 'io.gsonfire:gson-fire:1.8.5'
     }
 }
