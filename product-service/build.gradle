@@ -6,7 +6,6 @@ plugins {
 ext {
     lombokVersion = '1.18.20'
     h2Version = '2.1.214'
-    openAPIVersion = '2.0.2'
 }
 
 group = 'com.shoeshop'
@@ -33,8 +32,6 @@ dependencies {
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openAPIVersion}"
 }
 
 tasks.named('test') {
