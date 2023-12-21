@@ -10,11 +10,9 @@ import { DataResponse } from 'src/app/shared/interfaces';
 })
 export class CategoryService {
 
-  getProductByCategoryId(categoryId: number)  {
-    console.log('getProductByCategoryId', categoryId);
-    return this.httpClient.get<DataResponse<Product[]>>(`${environment.productService}/api/categories/${categoryId}/products`).pipe(map((data) => data.data));
-  }
+  constructor(private httpClient: HttpClient) { }
 
-  constructor(private httpClient: HttpClient) {
+  getProductByCategoryId(categoryId: number)  {
+    return this.httpClient.get<DataResponse<Product[]>>(`${environment.productService}/api/categories/${categoryId}/products`).pipe(map((data) => data.data));
   }
 }
