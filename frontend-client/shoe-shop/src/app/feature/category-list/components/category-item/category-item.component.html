@@ -1,6 +1,6 @@
 <div [ngClass]="['category-item', 'indent-' + level]">
   <h2 (click)="click(category.id)">{{ category.name }}</h2>
-  <ul *ngIf="category.subcategories">
+  <ul *ngIf="category.subcategories?.length">
     <li *ngFor="let subcategory of category.subcategories" class="category-item">
       <app-category-item [category]="subcategory" [level]="level + 1"></app-category-item>
     </li>
