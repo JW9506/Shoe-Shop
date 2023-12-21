@@ -38,6 +38,7 @@ Key highlight:
 View the project in minified view:
 
 ```bash
+.
 |-- api-gateway
 |   |-- src
 |   |   `-- main
@@ -136,6 +137,8 @@ View the project in minified view:
 |   |       |-- java
 |   |       |   `-- com
 |   |       |       `-- shoeshop
+|   |       |           |-- config
+|   |       |           |   `-- WebConfig.java
 |   |       |           |-- controller
 |   |       |           |   |-- CategoryController.java
 |   |       |           |   `-- ProductController.java
@@ -173,6 +176,6 @@ View the project in minified view:
 |-- settings.gradle
 `-- this.code-workspace
 
-52 directories, 82 files
+53 directories, 83 files
 
 ```
