@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  eureka-service:
+    build:
+      context: .
+      dockerfile: eureka-service/Dockerfile
+    ports:
+      - "8091:8091"
+
+  order-service:
+    build:
+      context: .
+      dockerfile: order-service/Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-service
+
+  product-service:
+    build:
+      context: .
+      dockerfile: product-service/Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-service
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    ports:
+      - "8090:8090"
+    depends_on:
+      - eureka-service
+      - order-service
+      - product-service
