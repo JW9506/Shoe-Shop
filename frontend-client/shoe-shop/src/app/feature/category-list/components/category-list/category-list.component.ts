@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CategoryNode } from '../interfaces/CategoryNode';
+import { CategoryStore } from '../../../../core/store/category.store';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-category-list',
@@ -10,13 +11,14 @@ import { CategoryNode } from '../interfaces/CategoryNode';
 })
 export class CategoryListComponent implements OnInit {
 
-  categories: CategoryNode[] = []
+  categories$ = this.categoryStore.select(state => state.categories);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private categoryStore: CategoryStore) { }
 
   ngOnInit(): void {
+
     this.httpClient.get(`${environment.productService}/api/categories/hierarchical`).subscribe((data) => {
-      this.categories = (data as any)['data']
+      this.categoryStore.setCategories((data as any)['data'])
     })
   }
 }

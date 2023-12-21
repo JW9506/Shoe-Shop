@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { tap } from 'rxjs';
+import { CategoryStore } from 'src/app/core/store/category.store';
 
 @Component({
   selector: 'app-product-list',
@@ -7,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class ProductListComponent {
 
+  products$ = this.categoryStore.select(state => state.products);
+
+  constructor(private httpClient: HttpClient, private categoryStore: CategoryStore) {
+  }
 }

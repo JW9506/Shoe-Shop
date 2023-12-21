@@ -1,1 +1,1 @@
-<app-category-item *ngFor="let category of categories" [category]="category"></app-category-item>
+<app-category-item *ngFor="let category of categories$ | async" [category]="category"></app-category-item>
