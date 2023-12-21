@@ -9,10 +9,14 @@ import { ProductListModule } from './feature/product-list/product-list.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { CategoryStore } from './core/store/category.store';
+import { LoadingComponent } from './shared/components/loading/loading.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './core/network/Interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,11 @@ import { CategoryStore } from './core/store/category.store';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     StoreModule.forRoot({}, {})
   ],
-  providers: [CategoryStore],
+  providers: [CategoryStore, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
