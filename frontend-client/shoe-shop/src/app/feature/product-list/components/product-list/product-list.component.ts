@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { tap } from 'rxjs';
+import { of, tap } from 'rxjs';
 import { CategoryStore } from 'src/app/core/store/category.store';
 
 @Component({
@@ -11,6 +11,14 @@ import { CategoryStore } from 'src/app/core/store/category.store';
 export class ProductListComponent {
 
   products$ = this.categoryStore.select(state => state.products);
+  // products$ = of([
+  //   {
+  //     description: 'description',
+  //     parentCategoryName: 'parentCategoryName',
+  //     name: 'name',
+  //     price: 123
+  //   }
+  // ])
 
   constructor(private httpClient: HttpClient, private categoryStore: CategoryStore) {
   }

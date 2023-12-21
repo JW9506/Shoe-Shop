@@ -20,11 +20,11 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
 
     public ProductDto createProduct(ProductCreateDto productCreateDto) {
-        Category category = categoryRepository.getReferenceById(productCreateDto.getParentCategoryId());
+        Category category = categoryRepository.getReferenceById(productCreateDto.getCategoryId());
         Product p = Product.builder() //
                 .name(productCreateDto.getName()) //
                 .description(productCreateDto.getDescription()) //
-                .price(productCreateDto.getPrice()) //
+                .salePrice(productCreateDto.getSalePrice()) //
                 .category(category) //
                 .build();
         p = productRepository.save(p);

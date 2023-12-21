@@ -1,5 +1,6 @@
 package com.shoeshop.dto;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,11 @@ public class ProductCreateDto {
 
     private String name;
     private String description;
-    private Double price;
-    private Long parentCategoryId;
+    private Long categoryId;
+    private BigDecimal originalPrice;
+    private BigDecimal salePrice;
+    private Long rating;
+    private Boolean inStock;
+    private String brand;
+    private String imageUrl;
 }

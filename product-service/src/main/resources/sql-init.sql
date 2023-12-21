@@ -13,7 +13,12 @@ create table t_product (
     parent_category_id int not null,
     name varchar(255) not null,
     description text,
-    price DECIMAL(10, 2),
+    original_price DECIMAL(10, 2),
+    sale_price DECIMAL(10, 2),
+    rating int,
+    is_in_stock boolean,
+    brand varchar(255),
+    image_url varchar(255),
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     FOREIGN KEY (parent_category_id) REFERENCES t_categories(category_id)
@@ -32,15 +37,12 @@ INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Womens
 INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Mens Trail Running', 'Trail running shoes for men', (SELECT category_id FROM t_categories WHERE name = 'Trail Running'));
 INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Womens Trail Running', 'Trail running shoes for women', (SELECT category_id FROM t_categories WHERE name = 'Trail Running'));
 
-insert into t_product (parent_category_id, name, description, price) values (4, 'Nike', 'Super fast Nike', 23.99);
-insert into t_product (parent_category_id, name, description, price) values (3, 'Adidas', 'Super fast Adidas', 13.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID , NAME ,DESCRIPTION ,PRICE ) values
-(7,'Jordan', 'Super fast Jordan', 59.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (5, 'Adidas', 'Super fast Reebok', 89.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (4, 'Adidas', 'Lightweight Converse', 39.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (4, 'Converse', 'High performance Reebok', 69.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (7, 'Puma', 'Super fast Puma', 29.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (5, 'Nike', 'Lightweight Converse', 69.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (3, 'Puma', 'Lightweight Nike', 19.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (4, 'Puma', 'Lightweight Adidas', 89.99);
-insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (6, 'Puma', 'Lightweight Asics', 59.99);
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (4, 'Nike', 'Super fast Nike', 23.99, NULL, 5, true, 'Nike', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (5, 'Adidas', 'Lightweight Adidas', 45.99, NULL, 4, true, 'Adidas', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (6, 'Reebok', 'Comfortable Reebok', 39.99, NULL, 3, true, 'Reebok', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (2, 'Converse', 'Stylish Converse', 54.99, NULL, 5, true, 'Converse', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (7, 'New Balance', 'Durable New Balance', 65.00, NULL, 4, true, 'New Balance', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (3, 'Puma', 'High performance Puma', 49.99, NULL, 3, true, 'Puma', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (4, 'Asics', 'Reliable Asics', 59.99, NULL, 5, true, 'Asics', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (5, 'Nike', 'Innovative Nike', 79.99, NULL, 4, true, 'Nike', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');
+insert into t_product (parent_category_id, name, description, original_price, sale_price, rating, is_in_stock, brand, image_url) values (6, 'Adidas', 'Sporty Adidas', 67.99, NULL, 3, true, 'Adidas', 'https://i.ibb.co/ByYrksp/placehold-shoe.png');

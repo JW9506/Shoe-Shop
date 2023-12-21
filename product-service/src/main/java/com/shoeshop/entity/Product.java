@@ -1,5 +1,6 @@
 package com.shoeshop.entity;
 
+import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,10 +34,25 @@ public class Product {
     @Column
     private String description;
 
-    @Column(nullable = false)
-    private Double price;
-
     @ManyToOne
     @JoinColumn(name = "parent_category_id", nullable = false)
     private Category category;
+
+    @Column(name = "original_price")
+    private BigDecimal originalPrice;
+
+    @Column(name = "sale_price")
+    private BigDecimal salePrice;
+
+    @Column
+    private Long rating;
+
+    @Column(name = "is_in_stock")
+    private Boolean inStock;
+
+    @Column
+    private String brand;
+
+    @Column
+    private String imageUrl;
 }
