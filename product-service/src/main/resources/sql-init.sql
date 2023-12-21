@@ -36,3 +36,11 @@ insert into t_product (parent_category_id, name, description, price) values (4, 
 insert into t_product (parent_category_id, name, description, price) values (3, 'Adidas', 'Super fast Adidas', 13.99);
 insert into T_PRODUCT (PARENT_CATEGORY_ID , NAME ,DESCRIPTION ,PRICE ) values
 (7,'Jordan', 'Super fast Jordan', 59.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (5, 'Adidas', 'Super fast Reebok', 89.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (4, 'Adidas', 'Lightweight Converse', 39.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (4, 'Converse', 'High performance Reebok', 69.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (7, 'Puma', 'Super fast Puma', 29.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (5, 'Nike', 'Lightweight Converse', 69.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (3, 'Puma', 'Lightweight Nike', 19.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (4, 'Puma', 'Lightweight Adidas', 89.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID, NAME, DESCRIPTION, PRICE) values (6, 'Puma', 'Lightweight Asics', 59.99);
