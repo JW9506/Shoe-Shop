@@ -34,3 +34,5 @@ INSERT INTO t_categories (name, description, parent_category_id) VALUES ('Womens
 
 insert into t_product (parent_category_id, name, description, price) values (4, 'Nike', 'Super fast Nike', 23.99);
 insert into t_product (parent_category_id, name, description, price) values (3, 'Adidas', 'Super fast Adidas', 13.99);
+insert into T_PRODUCT (PARENT_CATEGORY_ID , NAME ,DESCRIPTION ,PRICE ) values
+(7,'Jordan', 'Super fast Jordan', 59.99);

@@ -16,7 +16,7 @@ public class ProductDto {
 
     private String name;
     private String description;
-    private String parentCategoryName;
+    private String categoryName;
     private Double price;
 
     public static ProductDto from(Product product) {
@@ -24,7 +24,7 @@ public class ProductDto {
                 .description(product.getDescription())
                 .name(product.getName())
                 .price(product.getPrice())
-                .parentCategoryName(product.getCategory().getName())
+                .categoryName(product.getCategory().getName())
                 .build();
     }
 
