@@ -2,9 +2,10 @@ package com.shoeshop.service;
 
 import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,9 @@ import com.shoeshop.repository.CategoryRepository;
 import com.shoeshop.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -42,14 +45,15 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
+    // Note: clear the map when a new category is added.
+    ConcurrentHashMap<Long, CategoryNode> categoryNodeMap = new ConcurrentHashMap<>();
     @Transactional
     @Cacheable("categoryTree")
     public List<CategoryNode> getHierarchicalCategories() {
         List<Category> allCategories = categoryRepository.findAll();
-        Map<Long, CategoryNode> nodeMap = new HashMap<>();
 
         allCategories.forEach( //
-                cat -> nodeMap.put( //
+                cat -> categoryNodeMap.put( //
                         cat.getCategoryId(), //
                         new CategoryNode(cat.getCategoryId(), cat.getName(), new ArrayList<>()) //
                 ) //
@@ -57,23 +61,35 @@ public class CategoryService {
 
         CategoryNode root = new CategoryNode(); // Root node
         for (Category cat : allCategories) {
-            CategoryNode node = nodeMap.get(cat.getCategoryId());
+            CategoryNode node = categoryNodeMap.get(cat.getCategoryId());
             if (cat.getParentCategory() == null) {
                 root.getSubcategories().add(node);
             } else {
-                CategoryNode parentNode = nodeMap.get(cat.getParentCategory().getCategoryId());
+                CategoryNode parentNode = categoryNodeMap.get(cat.getParentCategory().getCategoryId());
                 parentNode.getSubcategories().add(node);
             }
         }
         return root.getSubcategories();
     }
 
+    @Cacheable("productsByCategory")
     public List<ProductDto> getProductsByCategory(Long categoryId) {
-        // Fetch products by category ID
-        List<Product> productDtos = productRepository.findByCategoryId(categoryId).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        return productDtos.stream()
-                       .map(ProductDto::from)
-                       .collect(Collectors.toList());
+        CategoryNode categoryNode = categoryNodeMap.get(categoryId);
+        List<ProductDto> productDtos = new ArrayList<>();
+        Deque<CategoryNode> queue = new LinkedList<>();
+        queue.add(categoryNode);
+        while (!queue.isEmpty()) {
+            CategoryNode node = queue.pollFirst();
+            List<Product> batch = productRepository.findByCategoryId(node.getId()).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
+            List<ProductDto> batchDto = batch.stream()
+                                            .map(ProductDto::from)
+                                            .collect(Collectors.toList());
+            productDtos.addAll(batchDto);
+            for (CategoryNode next : node.getSubcategories()) {
+                queue.add(next);
+            }
+        }
+        return productDtos;
     }
 
 }
