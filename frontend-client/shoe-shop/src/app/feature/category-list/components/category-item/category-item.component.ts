@@ -15,10 +15,6 @@ export class CategoryItemComponent {
 
   constructor(private categoryService: CategoryService, public categoryStore: CategoryStore) { }
 
-  get indentClass() {
-    return `indent-${this.level}`;
-  }
-
   click(categoryId: number) {
     this.categoryService.getProductByCategoryId(categoryId).subscribe((data) => {
       this.categoryStore.setProducts(data);
