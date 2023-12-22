@@ -5,7 +5,7 @@ export interface Product {
   originalPrice: number;
   salePrice: number | null;
   rating: number;
-  isInStock: boolean;
+  inStock: boolean;
   brand: string;
   tags: string[];
   imageUrl: string;
