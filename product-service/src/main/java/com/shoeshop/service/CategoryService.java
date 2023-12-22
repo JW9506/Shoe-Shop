@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.shoeshop.dto.CategoryDto;
@@ -28,6 +29,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    ConcurrentHashMap<Long, CategoryNode> categoryNodeMap = new ConcurrentHashMap<>();
 
     @Transactional
     public CategoryDto getCategory(Long id) {
@@ -45,23 +47,23 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    // Note: clear the map when a new category is added.
-    ConcurrentHashMap<Long, CategoryNode> categoryNodeMap = new ConcurrentHashMap<>();
-    private List<Category> initCategoryNodeMap() {
-        List<Category> allCategories = categoryRepository.findAll();
-        allCategories.forEach( //
-                cat -> categoryNodeMap.put( //
-                        cat.getCategoryId(), //
-                        new CategoryNode(cat.getCategoryId(), cat.getName(), new ArrayList<>()) //
-                ) //
-        );
-        return allCategories;
+    @CacheEvict(value = "categoryTree", allEntries = true)
+    public void clearCategoryNodeMapCache() {
+        categoryNodeMap.clear();
     }
 
     @Transactional
     @Cacheable("categoryTree")
     public List<CategoryNode> getHierarchicalCategories() {
-        List<Category> allCategories = initCategoryNodeMap();
+        List<Category> allCategories = categoryRepository.findAll();
+        if (categoryNodeMap.isEmpty()) {
+            allCategories.forEach( //
+                    cat -> categoryNodeMap.put( //
+                            cat.getCategoryId(), //
+                            new CategoryNode(cat.getCategoryId(), cat.getName(), new ArrayList<>()) //
+                    ) //
+            );
+        }
 
         CategoryNode root = new CategoryNode(); // Root node
         for (Category cat : allCategories) {
@@ -77,9 +79,10 @@ public class CategoryService {
     }
 
     @Cacheable("productsByCategory")
+    @Transactional
     public List<ProductDto> getProductsByCategory(Long categoryId) {
         if (categoryNodeMap.isEmpty()) {
-            initCategoryNodeMap();
+            getHierarchicalCategories();
         }
         log.info("getProductsByCategory: {}", categoryId);
         CategoryNode categoryNode = categoryNodeMap.get(categoryId);
