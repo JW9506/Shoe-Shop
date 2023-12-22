@@ -18,6 +18,7 @@ import com.shoeshop.entity.Product;
 import com.shoeshop.exceptions.EntityNotFoundException;
 import com.shoeshop.repository.CategoryRepository;
 import com.shoeshop.repository.ProductRepository;
+import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,13 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
-    ConcurrentHashMap<Long, CategoryNode> categoryNodeMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Long, CategoryNode> categoryNodeMap = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    public void init() {
+
+        getHierarchicalCategories();
+    }
 
     @Transactional
     public CategoryDto getCategory(Long id) {
@@ -48,16 +55,19 @@ public class CategoryService {
     }
 
     @Transactional
+    @Cacheable(value = "getHierarchicalCategories")
     public List<CategoryNode> getHierarchicalCategories() {
+
         List<Category> allCategories = categoryRepository.findAll();
-        if (categoryNodeMap.isEmpty()) {
-            allCategories.forEach( //
-                    cat -> categoryNodeMap.put( //
-                            cat.getCategoryId(), //
-                            new CategoryNode(cat.getCategoryId(), cat.getName(), new ArrayList<>()) //
-                    ) //
-            );
-        }
+
+        // Ensuring categoryNodeMap is empty before repopulating
+        categoryNodeMap.clear();
+        allCategories.forEach( //
+                cat -> categoryNodeMap.put( //
+                        cat.getCategoryId(), //
+                        new CategoryNode(cat.getCategoryId(), cat.getName(), new ArrayList<>()) //
+                ) //
+        );
 
         CategoryNode root = new CategoryNode(); // Root node
         for (Category cat : allCategories) {
@@ -74,20 +84,27 @@ public class CategoryService {
 
     @Transactional
     public List<ProductDto> getProductsByCategory(Long categoryId) {
-        if (categoryNodeMap.isEmpty()) {
-            getHierarchicalCategories();
-        }
+
         log.info("getProductsByCategory: {}", categoryId);
         CategoryNode categoryNode = categoryNodeMap.get(categoryId);
+
+        // If category does not exist, throw exception
+        if (categoryNode == null) {
+            throw new EntityNotFoundException(INVALID_INPUT);
+        }
+
+        // Use BFS to get all products
         List<ProductDto> productDtos = new ArrayList<>();
         Deque<CategoryNode> queue = new LinkedList<>();
         queue.add(categoryNode);
         while (!queue.isEmpty()) {
             CategoryNode node = queue.pollFirst();
+
             List<Product> batch = productRepository.findByCategoryId(node.getId()).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
             List<ProductDto> batchDto = batch.stream()
                                             .map(ProductDto::from)
                                             .collect(Collectors.toList());
+
             productDtos.addAll(batchDto);
             for (CategoryNode next : node.getSubcategories()) {
                 queue.add(next);
