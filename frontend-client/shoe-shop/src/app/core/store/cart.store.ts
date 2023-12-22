@@ -13,11 +13,12 @@ export class CartStore extends ComponentStore<CartState> {
     super({ cartItems: [], count: 0 });
   }
 
-  readonly setItemToCart = this.updater((state, items: Product) => {
+  readonly addProductToCart = this.updater((state, items: Product) => {
     const cartItems = state.cartItems.concat(items);
     return {
       ...state,
-      cartItems
+      cartItems,
+      count: state.count + 1
     }
   });
 
