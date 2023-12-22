@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.shoeshop.config.CurrentEnvironment;
-import com.shoeshop.config.ProductServiceProperties;
+import com.shoeshop.config.ProductServiceEndpointProperties;
 import com.shoeshop.exceptions.GlobalException;
 import com.shoeshop.order.model.ProductDto;
 import com.shoeshop.response.APIResponseWrapper;
@@ -31,15 +31,11 @@ public class ProductServiceClient {
 
     private final EurekaClient eurekaClient;
     private final HttpClient httpClient = HttpClient.newHttpClient();
-    private final ProductServiceProperties productServiceProperties;
+    private final ProductServiceEndpointProperties productServiceProperties;
     private final ObjectMapper objectMapper;
     private final CurrentEnvironment env;
 
     private String productServiceUrl() {
-        if (env.isDev()) {
-            return productServiceProperties.getUrl();
-        }
-        // TODO: secure flag should be dynamic based on env.isDev()
         InstanceInfo instance = eurekaClient.getNextServerFromEureka("product-service", false);
         return instance.getHomePageUrl();
     }

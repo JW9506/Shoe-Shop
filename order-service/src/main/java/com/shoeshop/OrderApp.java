@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import com.shoeshop.config.ProductServiceProperties;
+import com.shoeshop.config.ProductServiceEndpointProperties;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@EnableConfigurationProperties(ProductServiceProperties.class)
+@EnableConfigurationProperties(ProductServiceEndpointProperties.class)
 @EnableDiscoveryClient
 public class OrderApp {
 

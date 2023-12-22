@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "microservice.product-service")
-public class ProductServiceProperties {
-    private String url;
+public class ProductServiceEndpointProperties {
     private String allProducts;
 }
 

@@ -33,5 +33,4 @@ eureka:
 
 microservice:
   product-service:
-    url: http://localhost:8082
     all-products: /api/product/all
