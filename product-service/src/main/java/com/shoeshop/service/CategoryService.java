@@ -47,13 +47,7 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    @CacheEvict(value = "categoryTree", allEntries = true)
-    public void clearCategoryNodeMapCache() {
-        categoryNodeMap.clear();
-    }
-
     @Transactional
-    @Cacheable("categoryTree")
     public List<CategoryNode> getHierarchicalCategories() {
         List<Category> allCategories = categoryRepository.findAll();
         if (categoryNodeMap.isEmpty()) {
@@ -78,7 +72,6 @@ public class CategoryService {
         return root.getSubcategories();
     }
 
-    @Cacheable("productsByCategory")
     @Transactional
     public List<ProductDto> getProductsByCategory(Long categoryId) {
         if (categoryNodeMap.isEmpty()) {
