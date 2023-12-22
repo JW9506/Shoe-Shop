@@ -1,13 +1,12 @@
-<!-- <pre>{{product | json}}</pre> -->
 <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
   <img class="w-full" [src]="product.imageUrl" alt="Product Image">
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2">{{ product.name }}</div>
-    <p class="text-gray-700 text-base">
+    <p class="text-gray-700 text-base truncate">
       {{ product.description }}
     </p>
   </div>
-  <div class="px-6 pt-4 pb-2">
+  <div class="px-6 pt-4 pb-2 flex items-center">
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ product.parentCategoryName }}</span>
     <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">${{ product.originalPrice }}</span>
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
