@@ -15,6 +15,7 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { CartStore } from './core/store/cart.store';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     StoreModule.forRoot({}, {})
   ],
-  providers: [CategoryStore, {
+  providers: [CategoryStore, CartStore,{
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi: true

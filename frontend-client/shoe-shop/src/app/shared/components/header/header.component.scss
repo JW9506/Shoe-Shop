@@ -1,0 +1,45 @@
+.cart-notification {
+  position: relative;
+
+  /* Required for positioning the pseudo-element */
+  &::after {
+    content: attr(data-count);
+    /* Dynamic value from the data attribute */
+    position: absolute;
+    top: 0px;
+    /* Adjusts the position to be above the top right corner */
+    right: -8px;
+    /* Adjusts the position to be outside the right edge */
+    background-color: #ff3b3b;
+    /* Bright red background for visibility */
+    color: white;
+    border-radius: 50%;
+    /* Circle shape */
+    padding: 0.4em;
+    /* Uniform padding for a circular shape */
+    font-size: 0.8em;
+    /* Slightly smaller font size */
+    min-width: 20px;
+    /* Minimum width to ensure a circular shape */
+    height: 20px;
+    /* Fixed height to match the min-width */
+    display: flex;
+    /* Enables the use of Flexbox for centering content */
+    align-items: center;
+    /* Vertically centers the content */
+    justify-content: center;
+    /* Horizontally centers the content */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+    border: 2px solid white;
+    /* White border to enhance visibility on different backgrounds */
+    font-weight: bold;
+    /* Bold font for better readability */
+  }
+  &[data-count='0']::after,
+  &[data-count='']::after {
+    /* Hide when data-count is '0' or an empty string */
+    content: none;
+    display: none;
+  }
+}
