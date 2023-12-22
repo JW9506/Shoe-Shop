@@ -8,6 +8,7 @@ import { ProductService } from './feature/product-list/services/product.service'
 })
 export class AppComponent implements OnInit {
   title = 'shoe-shop';
+  cartItemCount = 3;
 
   constructor(private productService: ProductService) { }
 
