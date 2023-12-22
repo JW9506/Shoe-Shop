@@ -16,7 +16,8 @@ export class CartStore extends ComponentStore<CartState> {
     const cartItems = [...state.cartItems];
     for (let cartItem of cartItems) {
       if (cartItem.id === item.id) {
-        cartItem.quantity++;
+        ++cartItem.quantity;
+        cartItem.totalPrice = parseFloat((cartItem.quantity * (cartItem.salePrice || cartItem.originalPrice)).toFixed(2));
         return {
           ...state,
           cartItems,

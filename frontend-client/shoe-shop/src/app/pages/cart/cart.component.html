@@ -29,7 +29,7 @@
           <input class="mx-2 border text-center w-8" type="text" [value]="product.quantity">
         </div>
         <span class="text-center w-1/5 font-semibold text-sm">${{ product.salePrice || product.originalPrice }}</span>
-        <span class="text-center w-1/5 font-semibold text-sm">${{(product.salePrice || product.originalPrice) * 1}}</span> 
+        <span class="text-center w-1/5 font-semibold text-sm">${{ product.totalPrice }}</span> 
         <!--  /* Replace 1 with quantity */ -->
       </div>
 
