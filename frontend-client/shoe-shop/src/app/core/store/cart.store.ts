@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Product } from '../../feature/category-list/components/interfaces/Product';
-
+import { CartProduct } from 'src/app/feature/category-list/components/interfaces/CartProduct';
 export interface CartState {
-  cartItems: Product[];
+  cartItems: CartProduct[];
   count: number;
 }
 
@@ -13,16 +12,26 @@ export class CartStore extends ComponentStore<CartState> {
     super({ cartItems: [], count: 0 });
   }
 
-  readonly addProductToCart = this.updater((state, items: Product) => {
-    const cartItems = state.cartItems.concat(items);
+  readonly addProductToCart = this.updater((state, item: CartProduct) => {
+    const cartItems = [...state.cartItems];
+    for (let cartItem of cartItems) {
+      if (cartItem.id === item.id) {
+        cartItem.quantity++;
+        return {
+          ...state,
+          cartItems,
+          count: state.count + 1
+        }
+      }
+    }
     return {
       ...state,
-      cartItems,
+      cartItems: cartItems.concat(item),
       count: state.count + 1
     }
   });
 
-  readonly setCartItems = this.updater((state, CartItems: Product[]) => ({
+  readonly setCartItems = this.updater((state, CartItems: CartProduct[]) => ({
     ...state,
     CartItems
   }));

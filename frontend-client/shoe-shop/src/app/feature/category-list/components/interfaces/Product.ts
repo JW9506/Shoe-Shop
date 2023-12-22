@@ -1,4 +1,5 @@
 export interface Product {
+  id: string,
   description: string,
   parentCategoryName: string;
   name: string;

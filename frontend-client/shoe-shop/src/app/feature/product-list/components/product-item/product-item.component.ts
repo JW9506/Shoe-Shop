@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CartStore } from 'src/app/core/store/cart.store';
+import { CartProduct } from 'src/app/feature/category-list/components/interfaces/CartProduct';
 import { Product } from 'src/app/feature/category-list/components/interfaces/Product';
 
 @Component({
@@ -14,6 +15,7 @@ export class ProductItemComponent {
   constructor(private cartStore: CartStore) { }
 
   addProductToCart(p: Product) {
-    this.cartStore.addProductToCart(p);
+    const productItem: CartProduct = { ...p, quantity: 1 };
+    this.cartStore.addProductToCart(productItem);
   }
 }

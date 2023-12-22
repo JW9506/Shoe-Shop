@@ -15,6 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class ProductDto {
 
+    private String id;
     private String name;
     private String description;
     private String categoryName;
@@ -27,6 +28,7 @@ public class ProductDto {
 
     public static ProductDto from(Product product) {
         return ProductDto.builder() //
+                .id("" + product.getId())
                 .description(product.getDescription())
                 .name(product.getName())
                 .categoryName(product.getCategory().getName())
