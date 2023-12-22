@@ -1,5 +1,6 @@
 package com.shoeshop.exceptions;
 
+import static com.shoeshop.response.FailureInfo.INTERNAL_SERVER_ERROR;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.shoeshop.response.BaseResponse;
@@ -21,5 +22,11 @@ public class ExceptionAdvice {
             e.getInnerException().printStackTrace();
         }
         return new BaseResponse(e.getFailureInfo());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    protected BaseResponse runtimeException(RuntimeException e) {
+        e.printStackTrace();
+        return new BaseResponse(INTERNAL_SERVER_ERROR);
     }
 }
