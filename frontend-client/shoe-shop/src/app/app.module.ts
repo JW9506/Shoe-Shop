@@ -12,7 +12,7 @@ import { CategoryStore } from './core/store/category.store';
 import { CategoryListModule } from './feature/category-list/category-list.module';
 import { ProductListModule } from './feature/product-list/product-list.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
-import { CartComponent } from './pages/cart/cart.component';
+import { CartPageComponent } from './pages/cart/cart.page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { CartStore } from './core/store/cart.store';
@@ -21,7 +21,7 @@ import { CartStore } from './core/store/cart.store';
   declarations: [
     AppComponent,
     LoadingComponent,
-    CartComponent,
+    CartPageComponent,
     HomeComponent,
     HeaderComponent,
   ],
