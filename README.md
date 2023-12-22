@@ -60,7 +60,9 @@ View the project in minified view:
 |   |       |           |-- ApiGatewayApp.java
 |   |       |           `-- Result.java
 |   |       `-- resources
+|   |           |-- application-prod.yml
 |   |           `-- application.yml
+|   |-- Dockerfile
 |   `-- build.gradle
 |-- eureka-service
 |   |-- src
@@ -70,8 +72,90 @@ View the project in minified view:
 |   |       |       `-- shoeshop
 |   |       |           `-- EurekaApp.java
 |   |       `-- resources
+|   |           |-- application-prod.yml
 |   |           `-- application.yml
+|   |-- Dockerfile
 |   `-- build.gradle
+|-- frontend-client
+|   `-- shoe-shop
+|       |-- src
+|       |   |-- app
+|       |   |   |-- core
+|       |   |   |   |-- network
+|       |   |   |   |   `-- Interceptor.ts
+|       |   |   |   |-- service
+|       |   |   |   |   `-- LoadingService.ts
+|       |   |   |   `-- store
+|       |   |   |       `-- category.store.ts
+|       |   |   |-- feature
+|       |   |   |   |-- category-list
+|       |   |   |   |   |-- components
+|       |   |   |   |   |   |-- category-item
+|       |   |   |   |   |   |   |-- category-item.component.html
+|       |   |   |   |   |   |   |-- category-item.component.scss
+|       |   |   |   |   |   |   |-- category-item.component.spec.ts
+|       |   |   |   |   |   |   `-- category-item.component.ts
+|       |   |   |   |   |   |-- category-list
+|       |   |   |   |   |   |   |-- category-list.component.html
+|       |   |   |   |   |   |   |-- category-list.component.scss
+|       |   |   |   |   |   |   |-- category-list.component.spec.ts
+|       |   |   |   |   |   |   `-- category-list.component.ts
+|       |   |   |   |   |   `-- interfaces
+|       |   |   |   |   |       |-- CategoryNode.ts
+|       |   |   |   |   |       `-- Product.ts
+|       |   |   |   |   |-- services
+|       |   |   |   |   |   |-- category.service.spec.ts
+|       |   |   |   |   |   `-- category.service.ts
+|       |   |   |   |   |-- category-list-routing.module.ts
+|       |   |   |   |   `-- category-list.module.ts
+|       |   |   |   `-- product-list
+|       |   |   |       |-- components
+|       |   |   |       |   |-- product-item
+|       |   |   |       |   |   |-- product-item.component.html
+|       |   |   |       |   |   |-- product-item.component.scss
+|       |   |   |       |   |   |-- product-item.component.spec.ts
+|       |   |   |       |   |   `-- product-item.component.ts
+|       |   |   |       |   `-- product-list
+|       |   |   |       |       |-- product-list.component.html
+|       |   |   |       |       |-- product-list.component.scss
+|       |   |   |       |       |-- product-list.component.spec.ts
+|       |   |   |       |       `-- product-list.component.ts
+|       |   |   |       |-- services
+|       |   |   |       |   |-- product.service.spec.ts
+|       |   |   |       |   `-- product.service.ts
+|       |   |   |       |-- product-list-routing.module.ts
+|       |   |   |       `-- product-list.module.ts
+|       |   |   |-- shared
+|       |   |   |   |-- components
+|       |   |   |   |   `-- loading
+|       |   |   |   |       |-- loading.component.html
+|       |   |   |   |       |-- loading.component.scss
+|       |   |   |   |       |-- loading.component.spec.ts
+|       |   |   |   |       `-- loading.component.ts
+|       |   |   |   `-- interfaces.ts
+|       |   |   |-- app-routing.module.ts
+|       |   |   |-- app.component.html
+|       |   |   |-- app.component.scss
+|       |   |   |-- app.component.spec.ts
+|       |   |   |-- app.component.ts
+|       |   |   `-- app.module.ts
+|       |   |-- assets
+|       |   |-- environments
+|       |   |   |-- environment.development.ts
+|       |   |   |-- environment.production.ts
+|       |   |   `-- environment.ts
+|       |   |-- favicon.ico
+|       |   |-- index.html
+|       |   |-- main.ts
+|       |   `-- styles.scss
+|       |-- README.md
+|       |-- angular.json
+|       |-- notes.md
+|       |-- package.json
+|       |-- tsconfig.app.json
+|       |-- tsconfig.json
+|       |-- tsconfig.spec.json
+|       `-- yarn.lock
 |-- gradle
 |   `-- wrapper
 |       |-- gradle-wrapper.jar
@@ -84,7 +168,7 @@ View the project in minified view:
 |   |       |       `-- shoeshop
 |   |       |           |-- config
 |   |       |           |   |-- CurrentEnvironment.java
-|   |       |           |   `-- ProductServiceProperties.java
+|   |       |           |   `-- ProductServiceEndpointProperties.java
 |   |       |           |-- controller
 |   |       |           |   |-- CartController.java
 |   |       |           |   |-- CustomerController.java
@@ -113,7 +197,7 @@ View the project in minified view:
 |   |       |           |   |-- CustomerRepository.java
 |   |       |           |   `-- OrderRepository.java
 |   |       |           |-- response
-|   |       |           |   |-- APIResponseWrapper.java
+|   |       |           |   |-- APIResponseWrapperForJsonParsing.java
 |   |       |           |   |-- BaseResponse.java
 |   |       |           |   |-- DataResponse.java
 |   |       |           |   |-- FailureInfo.java
@@ -126,9 +210,11 @@ View the project in minified view:
 |   |       |           |-- AuditEntity.java
 |   |       |           `-- OrderApp.java
 |   |       `-- resources
+|   |           |-- application-prod.yml
 |   |           |-- application.yml
 |   |           |-- product-service-api.json
 |   |           `-- sql-init.sql
+|   |-- Dockerfile
 |   |-- build.gradle
 |   `-- fetchApi.sh
 |-- product-service
@@ -166,16 +252,19 @@ View the project in minified view:
 |   |       |           |   `-- ProductService.java
 |   |       |           `-- ProductApp.java
 |   |       `-- resources
+|   |           |-- application-prod.yml
 |   |           |-- application.yml
 |   |           `-- sql-init.sql
+|   |-- Dockerfile
 |   `-- build.gradle
 |-- README.md
 |-- build.gradle
+|-- docker-compose.yml
 |-- gradlew
 |-- gradlew.bat
 |-- settings.gradle
 `-- this.code-workspace
 
-53 directories, 83 files
+78 directories, 147 files
 
 ```
