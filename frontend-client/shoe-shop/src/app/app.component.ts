@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './feature/product-list/services/product.service';
+import { CartStore } from './core/store/cart.store';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,9 @@ import { ProductService } from './feature/product-list/services/product.service'
 })
 export class AppComponent implements OnInit {
   title = 'shoe-shop';
-  cartItemCount = 3;
+  cartItemCount$ = this.cartStore.select(state => state.count);
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private cartStore: CartStore) { }
 
   ngOnInit(): void {
     this.productService.getProductByCategoryId(3);
