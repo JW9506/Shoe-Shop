@@ -15,7 +15,7 @@ export class ProductItemComponent {
   constructor(private cartStore: CartStore) { }
 
   addProductToCart(p: Product) {
-    const productItem: CartProduct = { ...p, quantity: 1 };
+    const productItem: CartProduct = { ...p, quantity: 0 };
     this.cartStore.addProductToCart(productItem);
   }
 }

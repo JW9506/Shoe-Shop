@@ -12,12 +12,16 @@ export class CartStore extends ComponentStore<CartState> {
     super({ cartItems: [], count: 0 });
   }
 
+  private totalPriceCalculator(cartItem: CartProduct) {
+    return parseFloat((cartItem.quantity * (cartItem.salePrice || cartItem.originalPrice)).toFixed(2));
+  }
+
   readonly addProductToCart = this.updater((state, item: CartProduct) => {
     const cartItems = [...state.cartItems];
     for (let cartItem of cartItems) {
       if (cartItem.id === item.id) {
         ++cartItem.quantity;
-        cartItem.totalPrice = parseFloat((cartItem.quantity * (cartItem.salePrice || cartItem.originalPrice)).toFixed(2));
+        cartItem.totalPrice = this.totalPriceCalculator(cartItem);
         return {
           ...state,
           cartItems,
@@ -25,6 +29,8 @@ export class CartStore extends ComponentStore<CartState> {
         }
       }
     }
+    ++item.quantity;
+    item.totalPrice = this.totalPriceCalculator(item);
     return {
       ...state,
       cartItems: cartItems.concat(item),
