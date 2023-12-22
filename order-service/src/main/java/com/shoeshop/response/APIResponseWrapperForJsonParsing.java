@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class APIResponseWrapper<T> {
+public class APIResponseWrapperForJsonParsing<T> {
 
     @JsonProperty("isSuccess")
     private boolean isSuccess;

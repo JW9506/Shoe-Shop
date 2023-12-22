@@ -20,7 +20,7 @@ import com.shoeshop.config.CurrentEnvironment;
 import com.shoeshop.config.ProductServiceEndpointProperties;
 import com.shoeshop.exceptions.GlobalException;
 import com.shoeshop.order.model.ProductDto;
-import com.shoeshop.response.APIResponseWrapper;
+import com.shoeshop.response.APIResponseWrapperForJsonParsing;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,8 +74,8 @@ public class ProductServiceClient {
 
     private <T> T convertJsonToListOfProductDto(String jsonResponse) {
         try {
-            APIResponseWrapper<T> wrapper = objectMapper.readValue(jsonResponse,
-                    new TypeReference<APIResponseWrapper<T>>() {});
+            APIResponseWrapperForJsonParsing<T> wrapper = objectMapper.readValue(jsonResponse,
+                    new TypeReference<APIResponseWrapperForJsonParsing<T>>() {});
             return wrapper.getData();
         } catch (JsonProcessingException e) {
             throw new GlobalException(PARSING_ERROR, e);
