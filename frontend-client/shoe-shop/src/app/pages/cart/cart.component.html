@@ -1,1 +1,41 @@
-<p>cart works!</p>
+<div class="container mx-auto mt-10">
+  <div class="flex shadow-md my-10">
+    <div class="w-3/4 bg-white px-10 py-10">
+      <div class="flex justify-between border-b pb-8">
+        <h1 class="font-semibold text-2xl">Shopping Cart</h1>
+        <h2 class="font-semibold text-2xl">{{ (cartItems$|async)?.length }} Items</h2>
+      </div>
+      <div class="flex mt-10 mb-5">
+        <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
+        <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">Quantity</h3>
+        <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">Price</h3>
+        <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
+      </div>
+
+      <div *ngFor="let product of cartItems$|async; let i = index" class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+        <div class="flex w-2/5">
+          <div class="w-20">
+            <img class="h-24" [src]="product.imageUrl" alt="{{ product.name }}">
+          </div>
+          <div class="flex flex-col justify-between ml-4 flex-grow">
+            <span class="font-bold text-sm">{{ product.name }}</span>
+            <span class="text-gray-500 text-xs">{{ product.parentCategoryName }}</span>
+            <span class="text-red-500 text-xs" *ngIf="product.isInStock">In Stock</span>
+            <span class="text-gray-500 text-xs" *ngIf="!product.isInStock">Out of Stock</span>
+            <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+          </div>
+        </div>
+        <div class="flex justify-center w-1/5">
+          <input class="mx-2 border text-center w-8" type="text" value="1">
+        </div>
+        <span class="text-center w-1/5 font-semibold text-sm">${{ product.salePrice || product.originalPrice }}</span>
+        <span class="text-center w-1/5 font-semibold text-sm">${{(product.salePrice || product.originalPrice) * 1}}</span> 
+        <!--  /* Replace 1 with quantity */ -->
+      </div>
+
+      <a href="#" class="flex font-semibold text-indigo-600 text-sm mt-10">
+        Continue Shopping
+      </a>
+    </div>
+  </div>
+</div>
