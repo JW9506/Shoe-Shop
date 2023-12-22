@@ -8,8 +8,26 @@ export interface CartState {
 
 @Injectable({ providedIn: 'root' })
 export class CartStore extends ComponentStore<CartState> {
+
   constructor() {
     super({ cartItems: [], count: 0 });
+    this.loadInitialState();
+    this.effectOnStateChange();
+  }
+
+  // Method to load the initial state from localStorage
+  private loadInitialState() {
+    const savedCartState = localStorage.getItem('cartState');
+    if (savedCartState) {
+      this.setState(JSON.parse(savedCartState));
+    }
+  }
+
+  // Effect to subscribe to state changes and persist them to localStorage
+  private effectOnStateChange() {
+    this.state$.subscribe(state => {
+      localStorage.setItem('cartState', JSON.stringify(state));
+    });
   }
 
   private totalPriceCalculator(cartItem: CartProduct) {
