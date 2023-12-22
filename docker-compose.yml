@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: eureka-service/Dockerfile
+    networks:
+      - ms-network
     ports:
       - "8091:8091"
 
@@ -13,6 +15,8 @@ services:
       dockerfile: order-service/Dockerfile
     ports:
       - "8081:8081"
+    networks:
+      - ms-network
     depends_on:
       - eureka-service
 
@@ -22,6 +26,8 @@ services:
       dockerfile: product-service/Dockerfile
     ports:
       - "8082:8082"
+    networks:
+      - ms-network
     depends_on:
       - eureka-service
 
@@ -31,7 +37,12 @@ services:
       dockerfile: api-gateway/Dockerfile
     ports:
       - "8090:8090"
+    networks:
+      - ms-network
     depends_on:
       - eureka-service
       - order-service
       - product-service
+
+networks:
+  ms-network:

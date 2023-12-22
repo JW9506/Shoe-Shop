@@ -18,7 +18,6 @@ COPY order-service/src ./order-service/src
 RUN chmod +x gradlew
 
 # Build the project
-# -Dspring.profiles.active=prod
 RUN ./gradlew :order-service:build -x test
 
 # Stage 2: Create the Docker image with the built JAR file
@@ -31,4 +30,4 @@ COPY --from=build /workspace/app/order-service/build/libs/*.jar app.jar
 EXPOSE 8081
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=prod"]
