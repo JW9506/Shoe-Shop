@@ -15,4 +15,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  clearLocalStorage() {
+    localStorage.clear();
+    this.cartStore.setState({ cartItems: [], count: 0 });
+  }
 }
