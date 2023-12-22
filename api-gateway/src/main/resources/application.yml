@@ -12,3 +12,11 @@ spring:
 
 server:
   port: 8090
+
+eureka:
+  instance:
+    preferIpAddress: true
+    nonSecurePort: 8090
+  client:
+    serviceUrl:
+      defaultZone: http://host.docker.internal:8091/eureka/

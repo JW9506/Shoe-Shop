@@ -29,4 +29,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8091/eureka/
+      defaultZone: http://host.docker.internal:8091/eureka/
+  instance:
+    preferIpAddress: true
+    nonSecurePort: 8082
