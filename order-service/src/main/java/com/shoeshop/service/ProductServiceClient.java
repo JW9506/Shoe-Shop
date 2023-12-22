@@ -1,6 +1,7 @@
 package com.shoeshop.service;
 
 import static com.shoeshop.response.FailureInfo.BAD_THIRD_PARTY_ENDPOINT;
+import static com.shoeshop.response.FailureInfo.INTERNAL_SERVER_ERROR;
 import static com.shoeshop.response.FailureInfo.PARSING_ERROR;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -44,9 +45,15 @@ public class ProductServiceClient {
     }
 
     public List<ProductDto> getAllProducts() {
-        String url = productServiceUrl();
+        URI baseUri;
+        try {
+            baseUri = new URI(productServiceUrl());
+        } catch (Exception e) {
+            throw new GlobalException(INTERNAL_SERVER_ERROR, e);
+        }
+        URI fullUri = baseUri.resolve(productServiceProperties.getAllProducts());
+        String url = fullUri.toString();
         log.info("Product Service Url: {}", url);
-        url += productServiceProperties.getAllProducts();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
         try {
@@ -58,6 +65,8 @@ public class ProductServiceClient {
                 productDtos = convertJsonToListOfProductDto(response.body());
             } else {
                 // Handle non-successful response or throw an exception
+                log.info("Product Service returned non-successful response: {}, Url tried to request: {}",
+                        response.statusCode(), url);
                 productDtos = Collections.emptyList();
             }
 
