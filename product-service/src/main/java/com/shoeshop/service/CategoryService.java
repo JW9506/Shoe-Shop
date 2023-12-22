@@ -47,17 +47,21 @@ public class CategoryService {
 
     // Note: clear the map when a new category is added.
     ConcurrentHashMap<Long, CategoryNode> categoryNodeMap = new ConcurrentHashMap<>();
-    @Transactional
-    @Cacheable("categoryTree")
-    public List<CategoryNode> getHierarchicalCategories() {
+    private List<Category> initCategoryNodeMap() {
         List<Category> allCategories = categoryRepository.findAll();
-
         allCategories.forEach( //
                 cat -> categoryNodeMap.put( //
                         cat.getCategoryId(), //
                         new CategoryNode(cat.getCategoryId(), cat.getName(), new ArrayList<>()) //
                 ) //
         );
+        return allCategories;
+    }
+
+    @Transactional
+    @Cacheable("categoryTree")
+    public List<CategoryNode> getHierarchicalCategories() {
+        List<Category> allCategories = initCategoryNodeMap();
 
         CategoryNode root = new CategoryNode(); // Root node
         for (Category cat : allCategories) {
@@ -74,6 +78,10 @@ public class CategoryService {
 
     @Cacheable("productsByCategory")
     public List<ProductDto> getProductsByCategory(Long categoryId) {
+        if (categoryNodeMap.isEmpty()) {
+            initCategoryNodeMap();
+        }
+        log.info("getProductsByCategory: {}", categoryId);
         CategoryNode categoryNode = categoryNodeMap.get(categoryId);
         List<ProductDto> productDtos = new ArrayList<>();
         Deque<CategoryNode> queue = new LinkedList<>();
