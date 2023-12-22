@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './pages/cart/cart.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent
+  },
+  {
     path: 'cart',
-    loadChildren: () => import('./feature/cart/cart.module').then(m => m.CartModule)
-  }
+    component: CartComponent
+  },
 ];
 
 @NgModule({

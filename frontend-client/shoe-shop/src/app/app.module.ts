@@ -12,11 +12,17 @@ import { CategoryStore } from './core/store/category.store';
 import { CategoryListModule } from './feature/category-list/category-list.module';
 import { ProductListModule } from './feature/product-list/product-list.module';
 import { LoadingComponent } from './shared/components/loading/loading.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
+    CartComponent,
+    HomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

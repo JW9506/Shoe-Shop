@@ -9,11 +9,9 @@ import { CartStore } from './core/store/cart.store';
 })
 export class AppComponent implements OnInit {
   title = 'shoe-shop';
-  cartItemCount$ = this.cartStore.select(state => state.count);
 
-  constructor(private productService: ProductService, private cartStore: CartStore) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.productService.getProductByCategoryId(3);
   }
 }
