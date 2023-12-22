@@ -9,7 +9,7 @@ import { CartStore } from 'src/app/core/store/cart.store';
 })
 export class HeaderComponent implements OnInit {
 
-  cartItemCount$ = this.cartStore.select(state => state.count);
+  cartItemCount$ = this.cartStore.totalCount$;
 
   constructor(private cartStore: CartStore) { }
 
@@ -18,6 +18,6 @@ export class HeaderComponent implements OnInit {
 
   clearLocalStorage() {
     localStorage.clear();
-    this.cartStore.setState({ cartItems: [], count: 0 });
+    this.cartStore.setState({ cartItems: [] });
   }
 }

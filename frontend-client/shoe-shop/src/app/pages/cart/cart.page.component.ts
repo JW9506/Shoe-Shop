@@ -11,11 +11,7 @@ import { CartProduct } from 'src/app/feature/category-list/components/interfaces
 export class CartPageComponent implements OnInit {
 
   cartItems$ = this.cartStore.select(s => s.cartItems);
-  count$ = this.cartStore.select(s => s.count);
-
-  totalCount$: Observable<number> = this.cartItems$.pipe(
-    map((cartItems: CartProduct[]) => cartItems.reduce((acc, item) => acc + item.quantity, 0))
-  );
+  totalCount$ = this.cartStore.totalCount$;
 
   constructor(private cartStore: CartStore) {}
 

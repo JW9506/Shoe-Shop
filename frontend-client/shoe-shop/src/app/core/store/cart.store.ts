@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { Observable, map } from 'rxjs';
 import { CartProduct } from 'src/app/feature/category-list/components/interfaces/CartProduct';
 export interface CartState {
   cartItems: CartProduct[];
-  count: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class CartStore extends ComponentStore<CartState> {
 
   constructor() {
-    super({ cartItems: [], count: 0 });
+    super({ cartItems: [] });
     this.loadInitialState();
     this.effectOnStateChange();
   }
@@ -43,7 +43,6 @@ export class CartStore extends ComponentStore<CartState> {
         return {
           ...state,
           cartItems,
-          count: state.count + 1
         }
       }
     }
@@ -52,7 +51,6 @@ export class CartStore extends ComponentStore<CartState> {
     return {
       ...state,
       cartItems: cartItems.concat(item),
-      count: state.count + 1
     }
   });
 
@@ -61,7 +59,6 @@ export class CartStore extends ComponentStore<CartState> {
     return {
       ...state,
       cartItems,
-      count: state.count - product.quantity
     }
   })
 
@@ -74,4 +71,8 @@ export class CartStore extends ComponentStore<CartState> {
     ...state,
     count
   }));
+
+  readonly totalCount$: Observable<number> = this.select(s => s.cartItems).pipe(
+    map((cartItems: CartProduct[]) => cartItems.reduce((acc, item) => acc + item.quantity, 0))
+  );
 }
