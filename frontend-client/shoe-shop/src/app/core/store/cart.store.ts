@@ -55,10 +55,9 @@ export class CartStore extends ComponentStore<CartState> {
   });
 
   readonly removeProductFromCart = this.updater((state, product: CartProduct) => {
-    const cartItems = state.cartItems.filter(item => item.id !== product.id);
     return {
       ...state,
-      cartItems,
+      cartItems: state.cartItems.filter(item => item.id !== product.id),
     }
   })
 
