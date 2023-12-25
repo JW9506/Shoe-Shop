@@ -2,6 +2,7 @@ package com.shoeshop.controller;
 
 import static com.shoeshop.response.FailureInfo.INTERNAL_SERVER_ERROR;
 import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
+import static com.shoeshop.response.SuccessInfo.CHECKOUT_SUCCESSFUL;
 import static com.shoeshop.response.SuccessInfo.GET_ORDER;
 import static com.shoeshop.response.SuccessInfo.GET_PRODUCTS;
 import static com.shoeshop.response.SuccessInfo.POST_ORDER;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.shoeshop.dto.CheckOutDto;
 import com.shoeshop.dto.OrderCreateDto;
 import com.shoeshop.dto.OrderDto;
 import com.shoeshop.exceptions.EntityNotFoundException;
@@ -74,5 +76,12 @@ public class OrderController {
     public DataResponse<List<ProductDto>> getProducts() {
         List<ProductDto> allProducts = productServiceClient.getAllProducts();
         return new DataResponse<>(GET_PRODUCTS, allProducts);
+    }
+
+    @GetMapping("/checkout")
+    @Operation(summary = "Check out")
+    public DataResponse<Boolean> checkOut(@Valid @RequestBody CheckOutDto checkOutDto) {
+        log.info("checkOut {}", checkOutDto);
+        return new DataResponse<>(CHECKOUT_SUCCESSFUL, true);
     }
 }
