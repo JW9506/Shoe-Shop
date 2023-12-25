@@ -21,4 +21,8 @@ export class CartPageComponent implements OnInit {
   removeProduct(product: CartProduct) {
     this.cartStore.removeProductFromCart(product);
   }
+
+  checkOut() {
+    throw new Error('Method not implemented.');
+  }
 }
