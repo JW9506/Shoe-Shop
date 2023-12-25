@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { AuthUser } from 'src/app/shared/interfaces';
 import { TokenService } from '../service/TokenService';
+import { tap } from 'rxjs';
 
 export interface LoginState {
   user: AuthUser | null;
@@ -11,10 +12,19 @@ export interface LoginState {
 @Injectable({ providedIn: 'root' })
 export class LoginStore extends ComponentStore<LoginState> {
 
+  private currentState: LoginState | null = null;
+
   constructor(private tokenService: TokenService) {
     super({ user: null, jwtToken: '' });
+    this.state$.pipe(
+      tap(state => this.currentState = state)
+    ).subscribe();
     this.loadInitialState();
     this.effectOnStateChange();
+  }
+
+  getCurrentStateSync(): LoginState | null {
+    return this.currentState;
   }
 
   // Method to load the initial state from localStorage

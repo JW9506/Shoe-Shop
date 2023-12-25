@@ -78,7 +78,7 @@ public class OrderController {
         return new DataResponse<>(GET_PRODUCTS, allProducts);
     }
 
-    @GetMapping("/checkout")
+    @PostMapping("/checkout")
     @Operation(summary = "Check out")
     public DataResponse<Boolean> checkOut(@Valid @RequestBody CheckOutDto checkOutDto) {
         log.info("checkOut {}", checkOutDto);

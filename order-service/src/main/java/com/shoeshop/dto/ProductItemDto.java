@@ -1,6 +1,6 @@
 package com.shoeshop.dto;
 
-import java.util.List;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +12,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CheckOutDto {
+public class ProductItemDto {
 
-    private String customerId;
-    private List<ProductItemDto> cartItemDtos;
-
+    private String productId;
+    private Long quantity;
+    private BigDecimal totalPrice;
 }
