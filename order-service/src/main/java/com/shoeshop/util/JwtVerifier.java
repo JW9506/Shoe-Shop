@@ -9,6 +9,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
+import java.util.Date;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -98,10 +99,19 @@ public class JwtVerifier {
             // TODO: Additional claims validation can go here
             log.info("{}", jwt.getClaims());
 
-            return true;
+            // Check if the current time is after the expiration time
+            return !isTokenExpired(jwt);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean isTokenExpired(DecodedJWT jwt) {
+        Date expirationTime = jwt.getExpiresAt(); // Get the expiration time
+        Date currentTime = new Date();            // Get the current time
+
+        // Check if the current time is after the expiration time
+        return expirationTime != null && currentTime.after(expirationTime);
     }
 }
