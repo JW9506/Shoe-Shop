@@ -10,5 +10,10 @@ public class DataResponse<T> extends BaseResponse {
         super(successInfo);
         this.data = data;
     }
+
+    public DataResponse(FailureInfo failureInfo, T data) {
+        super(failureInfo);
+        this.data = data;
+    }
 }
 
