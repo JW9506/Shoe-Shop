@@ -6,6 +6,7 @@ plugins {
 ext {
     lombokVersion = '1.18.20'
     h2Version = '2.1.214'
+    jsonWebTokenVersion = '3.8.1'
 }
 
 group = 'com.shoeshop'
@@ -29,6 +30,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     runtimeOnly "com.h2database:h2:${h2Version}"
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation "com.auth0:java-jwt:${jsonWebTokenVersion}"
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
