@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/core/service/TokenService';
 import { LoginStore } from 'src/app/core/store/login.store';
 import { AuthResponse, AuthUser, DataResponse } from 'src/app/shared/interfaces';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const code = params['code'];
-      this.httpClient.get<DataResponse<AuthResponse>>(`http://localhost:8092/api/auth/login/google/callback?code=${code}`).subscribe((data) => {
+      this.httpClient.get<DataResponse<AuthResponse>>(`${environment.authService}/api/auth/login/google/callback?code=${code}`).subscribe((data) => {
         const jwtToken = data.data.id_token;
         const user: AuthUser | null = this.tokenService.decodeToken(jwtToken);
         if (user) {

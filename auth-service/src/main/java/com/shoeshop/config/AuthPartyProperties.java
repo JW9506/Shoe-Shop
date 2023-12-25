@@ -11,6 +11,7 @@ import lombok.Setter;
 public class AuthPartyProperties {
     private String clientId;
     private String clientSecret;
+    private String redirectUri;
     private List<String> scope;
 }
 

@@ -8,6 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +32,11 @@ public class AuthController {
 
     @GetMapping("/login/google")
     public void googleLogin(HttpServletResponse response) throws IOException {
-        // String redirectUri = "http://localhost:8092/api/auth/login/google/callback";
-        String redirectUri = "http://localhost:4200/login";
+        String redirectUri = authPartyProperties.getRedirectUri();
         String clientId = authPartyProperties.getClientId();
-        String scope = "https://www.googleapis.com/auth/userinfo.email " + 
-          "https://www.googleapis.com/auth/userinfo.profile";
+        String scope = authPartyProperties.getScope().stream()
+            .map(s -> "https://www.googleapis.com/auth/userinfo." + s)
+            .collect(Collectors.joining(" "));
         
         String authorizationUrl = "https://accounts.google.com/o/oauth2/v2/auth" +
             "?client_id=" + clientId +
@@ -43,7 +44,7 @@ public class AuthController {
             "&response_type=code" +
             "&scope=" + URLEncoder.encode(scope, StandardCharsets.UTF_8);
 
-        log.info("{}", authorizationUrl);
+        log.info(" {}", authorizationUrl);
         response.sendRedirect(authorizationUrl);
     }
 
@@ -53,8 +54,7 @@ public class AuthController {
         // Exchange code for access token
         String clientId = authPartyProperties.getClientId();
         String clientSecret = authPartyProperties.getClientSecret();
-        // String redirectUri = "http://localhost:8092/api/auth/login/google/callback";
-        String redirectUri = "http://localhost:4200/login";
+        String redirectUri = authPartyProperties.getRedirectUri();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://oauth2.googleapis.com/token"))

@@ -6,7 +6,7 @@ spring:
           google:
             clientId: 1038731093546-eg4ur0qjetu5fcfchp6lhjmn7gelsm4p.apps.googleusercontent.com
             clientSecret: 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
-            redirectUri: localhost:4200/login
+            redirectUri: "http://localhost:4200/login"
             scope:
               - email
               - profile
