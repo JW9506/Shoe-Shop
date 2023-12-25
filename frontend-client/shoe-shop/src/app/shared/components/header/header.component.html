@@ -12,7 +12,7 @@
       </div>
       <div class="hidden sm:flex sm:items-center">
         <a [routerLink]="['/cart']" routerLinkActive="router-link-active" class="text-white px-3 py-2 rounded-md text-sm font-medium cart-notification" [attr.data-count]="cartItemCount$|async">Cart</a>
-        <a href="#" class="text-white px-3 py-2 rounded-md text-sm font-medium">Log In</a>
+        <button href="#" (click)="loginWithPopup()" class="text-white px-3 py-2 rounded-md text-sm font-medium">Log In</button>
       </div>
     </div>
   </div>
