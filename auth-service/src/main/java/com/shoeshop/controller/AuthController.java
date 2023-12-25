@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shoeshop.config.AuthPartyProperties;
 import com.shoeshop.dto.AuthResponseDto;
 import com.shoeshop.response.DataResponse;
@@ -30,9 +31,11 @@ public class AuthController {
 
     @GetMapping("/login/google")
     public void googleLogin(HttpServletResponse response) throws IOException {
+        // String redirectUri = "http://localhost:8092/api/auth/login/google/callback";
         String redirectUri = "http://localhost:4200/login";
         String clientId = authPartyProperties.getClientId();
-        String scope = "https://www.googleapis.com/auth/userinfo.email";
+        String scope = "https://www.googleapis.com/auth/userinfo.email " + 
+          "https://www.googleapis.com/auth/userinfo.profile";
         
         String authorizationUrl = "https://accounts.google.com/o/oauth2/v2/auth" +
             "?client_id=" + clientId +
@@ -40,15 +43,17 @@ public class AuthController {
             "&response_type=code" +
             "&scope=" + URLEncoder.encode(scope, StandardCharsets.UTF_8);
 
+        log.info("{}", authorizationUrl);
         response.sendRedirect(authorizationUrl);
     }
 
     @GetMapping("/login/google/callback")
     @ResponseBody
-    public DataResponse<AuthResponseDto> googleCallback(@RequestParam String code, HttpServletResponse response) throws IOException, InterruptedException {
+    public DataResponse<AuthResponseDto> googleCallback(@RequestParam String code) throws IOException, InterruptedException {
         // Exchange code for access token
         String clientId = authPartyProperties.getClientId();
         String clientSecret = authPartyProperties.getClientSecret();
+        // String redirectUri = "http://localhost:8092/api/auth/login/google/callback";
         String redirectUri = "http://localhost:4200/login";
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -65,9 +70,16 @@ public class AuthController {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        log.info("{}", httpResponse.body());
         // Extract access token from httpResponse and handle user session
+        ObjectMapper mapper = new ObjectMapper();
+        log.info("{}", httpResponse.body());
+        AuthResponseDto response = null;
+        try {
+            response = mapper.readValue(httpResponse.body(), AuthResponseDto.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        return new DataResponse<AuthResponseDto>(SUCCESS, null);
+        return new DataResponse<AuthResponseDto>(SUCCESS, response);
     }
 }

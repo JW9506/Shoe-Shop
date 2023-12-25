@@ -1,5 +1,6 @@
 package com.shoeshop.config;
 
+import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +11,6 @@ import lombok.Setter;
 public class AuthPartyProperties {
     private String clientId;
     private String clientSecret;
+    private List<String> scope;
 }
 

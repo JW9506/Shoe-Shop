@@ -18,6 +18,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { CartStore } from './core/store/cart.store';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginStore } from './core/store/login.store';
+import { AuthInterceptor } from './core/network/AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,10 @@ import { LoginStore } from './core/store/login.store';
   providers: [CategoryStore, CartStore, LoginStore, {
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
+    multi: true
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

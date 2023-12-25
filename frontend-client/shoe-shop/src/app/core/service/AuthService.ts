@@ -19,4 +19,10 @@ export class AuthService {
     const url = "http://localhost:8092/api/auth/login/google";
     window.open(url, 'Auth', `width=${width},height=${height},top=${top},left=${left}`);
   }
+
+  loginSamePage() {
+
+    const url = "http://localhost:8092/api/auth/login/google";
+    window.location.href = url;
+  }
 }

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TokenService } from 'src/app/core/service/TokenService';
 import { LoginStore } from 'src/app/core/store/login.store';
+import { AuthResponse, AuthUser, DataResponse } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,20 @@ import { LoginStore } from 'src/app/core/store/login.store';
 })
 export class LoginComponent implements OnInit {
 
-  // obtain code
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private loginStore: LoginStore) {
+  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private loginStore: LoginStore, private tokenService: TokenService, private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const code = params['code'];
-      this.httpClient.get(`http://localhost:8092/api/auth/login/google/callback?code=${code}`).subscribe((data) => {
-        console.log(data);
+      this.httpClient.get<DataResponse<AuthResponse>>(`http://localhost:8092/api/auth/login/google/callback?code=${code}`).subscribe((data) => {
+        const jwtToken = data.data.id_token;
+        const user: AuthUser = this.tokenService.decodeToken(jwtToken);
+        this.loginStore.setJwtToken(jwtToken);
+        sessionStorage.setItem('jwt', jwtToken);
+        this.loginStore.setUser(user);
+        this.router.navigate(['/']);
       });
     });
   }

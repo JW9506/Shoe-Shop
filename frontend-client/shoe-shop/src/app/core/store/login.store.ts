@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { AuthUser } from 'src/app/shared/interfaces';
 
 export interface LoginState {
-  userName: string;
-  email: string;
+  user?: AuthUser;
+  jwtToken?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class LoginStore extends ComponentStore<LoginState> {
 
   constructor() {
-    super({ userName: '', email: '' });
+    super({ user: undefined, jwtToken: '' });
   }
 
-  readonly setUserName = this.updater((state, newState: LoginState) => {
+  readonly setUser = this.updater((state, user: AuthUser) => {
     return {
       ...state,
-      userName: newState.userName,
+      user,
     }
   });
 
-  readonly setEmail = this.updater((state, newState: LoginState) => {
+  readonly setJwtToken = this.updater((state, token: string) => {
     return {
       ...state,
-      email: newState.email,
+      jwtToken: token,
     }
   });
 }
