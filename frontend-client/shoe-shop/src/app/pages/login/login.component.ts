@@ -21,11 +21,12 @@ export class LoginComponent implements OnInit {
       const code = params['code'];
       this.httpClient.get<DataResponse<AuthResponse>>(`http://localhost:8092/api/auth/login/google/callback?code=${code}`).subscribe((data) => {
         const jwtToken = data.data.id_token;
-        const user: AuthUser = this.tokenService.decodeToken(jwtToken);
-        this.loginStore.setJwtToken(jwtToken);
-        sessionStorage.setItem('jwt', jwtToken);
-        this.loginStore.setUser(user);
-        this.router.navigate(['/']);
+        const user: AuthUser | null = this.tokenService.decodeToken(jwtToken);
+        if (user) {
+          this.loginStore.setJwtToken(jwtToken);
+          this.loginStore.setUser(user);
+          this.router.navigate(['/']);
+        }
       });
     });
   }

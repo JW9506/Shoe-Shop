@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   clearLocalStorage() {
-    localStorage.clear();
     this.cartStore.setState({ cartItems: [] });
+    this.loginStore.setState({ user: null, jwtToken: '' });
   }
 }
