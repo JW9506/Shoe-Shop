@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "oauth2.google")
+@ConfigurationProperties(prefix = "spring.security.oauth2.client.registration.google")
 public class AuthPartyProperties {
     private String clientId;
     private String clientSecret;
