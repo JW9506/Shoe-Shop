@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.shoeshop.dto.CustomerDto;
+import com.shoeshop.dto.OrderDto;
 import com.shoeshop.entity.Customer;
 import com.shoeshop.entity.Order;
 import com.shoeshop.exceptions.EntityNotFoundException;
@@ -28,12 +29,19 @@ public class CustomerService {
                 .orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
         CustomerDto customerDto = CustomerDto.from(c);
         
-        if (fields != null && fields.contains("orders")) {
+        if (fields != null) {
             List<Order> orders = orderRepository.findByCustomerId(c.getId()).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-            customerDto.setOrders(new ArrayList<>());
-            orders.forEach(order -> {
-                customerDto.getOrders().add("" + order.getId());
-            });
+            if (fields.contains("orders")) {
+                customerDto.setOrders(new ArrayList<>());
+                orders.forEach(order -> {
+                    customerDto.getOrders().add("" + order.getId());
+                });
+            } else if (fields.contains("ordersPlus")) {
+                customerDto.setOrdersPlus(new ArrayList<>());
+                orders.forEach(order -> {
+                    customerDto.getOrdersPlus().add(OrderDto.from(order));
+                });
+            }
         }
 
         return customerDto;

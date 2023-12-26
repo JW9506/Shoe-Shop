@@ -5,6 +5,14 @@ Currently, there are 4 microservices, each has its own build.gradle to declare i
 Some API to ping:
 
 ```bash
+Get /api/customer/id {
+    request param {
+        fields {
+            orders # To display just the order id
+            ordersPlus # To display full OrderDto
+        }
+    }
+}
 Post /api/product
     request body {
         String name

@@ -20,6 +20,8 @@ public class CustomerDto {
     private String email;
     @JsonInclude(JsonInclude.Include.NON_NULL) 
     private List<String> orders;
+    @JsonInclude(JsonInclude.Include.NON_NULL) 
+    private List<OrderDto> ordersPlus;
 
     public static CustomerDto from(Customer c) {
         return CustomerDto.builder() //
