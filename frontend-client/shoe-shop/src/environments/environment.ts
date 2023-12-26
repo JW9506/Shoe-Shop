@@ -1,4 +1,6 @@
 export const environment = {
-    isProduction: false,
-    productService: '',
+  isProduction: false,
+  productService: '',
+  authService: '',
+  orderService: '',
 }

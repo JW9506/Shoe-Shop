@@ -16,6 +16,9 @@ import { CartPageComponent } from './pages/cart/cart.page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { CartStore } from './core/store/cart.store';
+import { LoginComponent } from './pages/login/login.component';
+import { LoginStore } from './core/store/login.store';
+import { AuthInterceptor } from './core/network/AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { CartStore } from './core/store/cart.store';
     CartPageComponent,
     HomeComponent,
     HeaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +38,13 @@ import { CartStore } from './core/store/cart.store';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     StoreModule.forRoot({}, {})
   ],
-  providers: [CategoryStore, CartStore,{
+  providers: [CategoryStore, CartStore, LoginStore, {
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
+    multi: true
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

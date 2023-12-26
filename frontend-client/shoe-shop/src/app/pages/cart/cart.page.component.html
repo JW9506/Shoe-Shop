@@ -32,9 +32,15 @@
         <span class="text-center w-1/5 font-semibold text-sm">${{ product.totalPrice }}</span> 
       </div>
 
-      <button [routerLink]="['/']" routerLinkActive="router-link-active" class="flex font-semibold text-indigo-600 text-sm mt-10">
-        Continue Shopping
-      </button>
+      <div class="flex justify-between">
+        <button [routerLink]="['/']" routerLinkActive="router-link-active" class="flex font-semibold text-indigo-600 text-sm mt-10">
+          Continue Shopping
+        </button>
+
+        <button (click)="checkOut()" class="flex font-semibold text-indigo-600 text-sm mt-10">
+          Check out
+        </button>
+      </div>
     </div>
   </div>
 </div>

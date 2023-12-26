@@ -6,7 +6,6 @@ plugins {
 ext {
     lombokVersion = '1.18.20'
     h2Version = '2.1.214'
-    jsonWebTokenVersion = '3.8.1'
 }
 
 group = 'com.shoeshop'
@@ -25,40 +24,16 @@ repositories {
 dependencies {
     // implementation "org.springframework.boot:spring-boot-starter-aop"
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    // implementation 'org.springframework.boot:spring-boot-starter-security'
+    // implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     runtimeOnly "com.h2database:h2:${h2Version}"
 
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation "com.auth0:java-jwt:${jsonWebTokenVersion}"
-
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-}
-
-// OpenAPI Generator configuration
-openApiGenerate {
-    generatorName = 'java'
-    inputSpec = "$projectDir/src/main/resources/product-service-api.json"  // URL of your product-service's OpenAPI spec
-    outputDir = "$buildDir/generated-sources/openapi"
-    apiPackage = 'com.shoeshop.order.api'  // Package for API classes
-    modelPackage = 'com.shoeshop.order.model'  // Package for model classes
-    invokerPackage = 'com.shoeshop.order.invoker'  // Package for invoker classes
-    configOptions = [
-        dateLibrary: 'java8'  // Use java8 date types
-    ]
-}
-
-compileJava.dependsOn tasks.named("openApiGenerate")
-
-sourceSets {
-    main {
-        java {
-            srcDir "$buildDir/generated-sources/openapi/src/main/java"
-        }
-    }
 }
 
 tasks.named('test') {
