@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.shoeshop.dto.CartDto;
-import com.shoeshop.dto.CartItemDto;
+import com.shoeshop.dto.OrderItemDto;
 import com.shoeshop.response.DataResponse;
 import com.shoeshop.service.CartService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/cart")
+@RequestMapping("/api/order/add")
 @Tag(name = "Cart", description = "Cart API")
 public class CartController {
 
@@ -33,15 +33,15 @@ public class CartController {
     }
 
     @GetMapping("/item/{id}")
-    public DataResponse<CartItemDto> getCartItemById(@PathVariable Long id) {
-        CartItemDto cartDto = cartService.getCartItemById(id);
+    public DataResponse<OrderItemDto> getCartItemById(@PathVariable Long id) {
+        OrderItemDto cartDto = cartService.getCartItemById(id);
         return new DataResponse<>(GET_CART_ITEM, cartDto);
     }
 
     @PostMapping("/addItem")
-    public DataResponse<CartItemDto> addCartItemToCart(@RequestBody CartItemDto cartItemDto) {
+    public DataResponse<OrderItemDto> addCartItemToCart(@RequestBody OrderItemDto cartItemDto) {
         log.info("Adding cart item to cart: {}", cartItemDto);
-        CartItemDto cartItem = cartService.addCartItemToCart(cartItemDto);
+        OrderItemDto cartItem = cartService.addCartItemToCart(cartItemDto);
         return new DataResponse<>(POST_CART_ITEM, cartItem);
     }
 }

@@ -17,24 +17,15 @@ create table t_order (
   foreign key (customer_id) references t_customer(id)
 );
 
-CREATE TABLE t_cart (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  customer_id INT,
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-  FOREIGN KEY (customer_id) REFERENCES t_customer(id)
-);
-
-CREATE TABLE t_cartitem (
+CREATE TABLE t_ordertitem (
   id INT AUTO_INCREMENT PRIMARY KEY,
   product_id INT,
-  cart_id INT,
+  order_id INT,
   quantity INT,
   total_price DECIMAL(10, 2),
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
-  FOREIGN KEY (product_id) REFERENCES t_order(id),
-  FOREIGN KEY (cart_id) REFERENCES t_cart(id)
+  FOREIGN KEY (order_id) REFERENCES t_order(id)
 );
 
 insert into t_customer (name, city, email, created_at, updated_at) values ('Jack', 'Egypt','Jack@example.com', '2023-06-30', '2023-06-30');

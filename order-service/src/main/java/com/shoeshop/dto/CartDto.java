@@ -18,14 +18,14 @@ public class CartDto {
 
     private Long id;
     private Long customerId;
-    private List<CartItemDto> cartItems;
+    private List<OrderItemDto> cartItems;
 
     public static CartDto from(Cart cart) {
         return CartDto.builder() //
                 .id(cart.getId()) //
                 .customerId(cart.getCustomerId()) //
                 .cartItems(cart.getCartItems() == null ? new ArrayList<>() : cart.getCartItems().stream()
-                        .map(CartItemDto::from).toList()) //
+                        .map(OrderItemDto::from).toList()) //
                 .build();
     }
 }

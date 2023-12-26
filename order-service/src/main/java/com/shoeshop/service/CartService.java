@@ -4,9 +4,9 @@ import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
 import org.springframework.stereotype.Service;
 import com.shoeshop.dto.CartCreateDto;
 import com.shoeshop.dto.CartDto;
-import com.shoeshop.dto.CartItemDto;
+import com.shoeshop.dto.OrderItemDto;
 import com.shoeshop.entity.Cart;
-import com.shoeshop.entity.CartItem;
+import com.shoeshop.entity.OrderItem;
 import com.shoeshop.exceptions.EntityNotFoundException;
 import com.shoeshop.repository.CartItemRepository;
 import com.shoeshop.repository.CartRepository;
@@ -27,16 +27,16 @@ public class CartService {
         return CartDto.from(cart);
     }
 
-    public CartItemDto addCartItemToCart(CartItemDto cartItemDto) {
+    public OrderItemDto addProductItemToOrder(OrderItemDto cartItemDto) {
         Cart cart = cartRepository.findById(cartItemDto.getCartId()).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        CartItem cartItem = CartItem.builder() //
+        OrderItem cartItem = OrderItem.builder() //
                 .cart(cart) //
                 .productId(cartItemDto.getProductId()) //
                 .quantity(cartItemDto.getQuantity()) //
                 .totalPrice(cartItemDto.getTotalPrice()) //
                 .build();
         cartItem = cartItemRepository.save(cartItem);
-        return CartItemDto.from(cartItem);
+        return OrderItemDto.from(cartItem);
     }
 
     public CartDto getCartById(Long id) {
@@ -44,8 +44,8 @@ public class CartService {
         return CartDto.from(cart);
     }
 
-    public CartItemDto getCartItemById(Long id) {
-        CartItem cartItem = cartItemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
-        return CartItemDto.from(cartItem);
+    public OrderItemDto getCartItemById(Long id) {
+        OrderItem cartItem = cartItemRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(INVALID_INPUT));
+        return OrderItemDto.from(cartItem);
     }
 }
