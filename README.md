@@ -27,8 +27,13 @@ Post /api/order
 Get /api/order/{id}
 Get /api/order/allproducts
 
-Get /api/cart/{id}
-Post /api/cart/addItem
+Post /api/order/addItem
+    request body {
+        Long orderId
+        Long productId
+        Long quantity
+        BigDecimal totalPrice
+    }
 ```
 
 Similar result can be found at `<service>/v3/api-docs`
