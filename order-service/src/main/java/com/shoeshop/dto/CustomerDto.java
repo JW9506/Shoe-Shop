@@ -1,5 +1,7 @@
 package com.shoeshop.dto;
 
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shoeshop.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +18,8 @@ public class CustomerDto {
 
     private String name;
     private String email;
+    @JsonInclude(JsonInclude.Include.NON_NULL) 
+    private List<String> orders;
 
     public static CustomerDto from(Customer c) {
         return CustomerDto.builder() //
