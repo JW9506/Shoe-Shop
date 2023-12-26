@@ -17,24 +17,15 @@ create table t_order (
   foreign key (customer_id) references t_customer(id)
 );
 
-CREATE TABLE t_cart (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  customer_id INT,
-  created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-  FOREIGN KEY (customer_id) REFERENCES t_customer(id)
-);
-
-CREATE TABLE t_cartitem (
+CREATE TABLE t_orderitem (
   id INT AUTO_INCREMENT PRIMARY KEY,
   product_id INT,
-  cart_id INT,
+  order_id INT,
   quantity INT,
   total_price DECIMAL(10, 2),
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
-  FOREIGN KEY (product_id) REFERENCES t_order(id),
-  FOREIGN KEY (cart_id) REFERENCES t_cart(id)
+  FOREIGN KEY (order_id) REFERENCES t_order(id)
 );
 
 insert into t_customer (name, city, email, created_at, updated_at) values ('Jack', 'Egypt','Jack@example.com', '2023-06-30', '2023-06-30');
@@ -52,11 +43,7 @@ insert into t_order (customer_id, details, payment_status, created_at, updated_a
 insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (6, 'Sports equipment purchase', 'UNPAID', '2023-06-30', '2023-06-30');
 insert into t_order (customer_id, details, payment_status, created_at, updated_at) values (7, 'Groceries and essentials', 'PAID', '2023-06-30', '2023-06-30');
 
-insert into t_cart (customer_id, created_at, updated_at) values (1, '2023-07-01 10:00:00', '2023-07-01 10:00:00');
-insert into t_cart (customer_id, created_at, updated_at) values (2, '2023-07-01 11:00:00', '2023-07-01 11:00:00');
-insert into t_cart (customer_id, created_at, updated_at) values (3, '2023-07-01 12:00:00', '2023-07-01 12:00:00');
-
-insert into t_cartitem (product_id, cart_id, quantity, total_price, created_at, updated_at) values (1, 1, 2, 100.00, '2023-07-01 10:05:00', '2023-07-01 10:05:00');
-insert into t_cartitem (product_id, cart_id, quantity, total_price, created_at, updated_at) values (2, 2, 1, 50.00, '2023-07-01 11:15:00', '2023-07-01 11:15:00');
-insert into t_cartitem (product_id, cart_id, quantity, total_price, created_at, updated_at) values (3, 3, 3, 150.00, '2023-07-01 12:30:00', '2023-07-01 12:30:00');
+insert into t_orderitem (product_id, order_id, quantity, total_price, created_at, updated_at) values (1, 1, 2, 100.00, '2023-07-01 10:05:00', '2023-07-01 10:05:00');
+insert into t_orderitem (product_id, order_id, quantity, total_price, created_at, updated_at) values (2, 2, 1, 50.00, '2023-07-01 11:15:00', '2023-07-01 11:15:00');
+insert into t_orderitem (product_id, order_id, quantity, total_price, created_at, updated_at) values (3, 3, 3, 150.00, '2023-07-01 12:30:00', '2023-07-01 12:30:00');
 

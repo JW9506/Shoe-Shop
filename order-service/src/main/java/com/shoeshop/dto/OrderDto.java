@@ -1,6 +1,8 @@
 package com.shoeshop.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import com.shoeshop.entity.Order;
 import com.shoeshop.enums.PaymentStatus;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ public class OrderDto {
     private String orderDetails;
     private CustomerDto customer;
     private PaymentStatus paymentStatus;
+    private List<OrderItemDto> orderItemDtos;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -29,6 +32,7 @@ public class OrderDto {
                 .customer(CustomerDto.from(order.getCustomer())) //
                 .orderDetails(order.getOrderDetails()) //
                 .paymentStatus(order.getPaymentStatus()) //
+                .orderItemDtos(order.getOrderItems().stream().map(OrderItemDto::from).collect(Collectors.toList())) //
                 .createdAt(order.getCreatedAt()) //
                 .updatedAt(order.getUpdatedAt()) //
                 .build();
