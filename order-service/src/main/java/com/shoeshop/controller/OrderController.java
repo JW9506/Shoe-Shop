@@ -7,6 +7,7 @@ import static com.shoeshop.response.SuccessInfo.CHECKOUT_SUCCESSFUL;
 import static com.shoeshop.response.SuccessInfo.GET_ORDER;
 import static com.shoeshop.response.SuccessInfo.GET_PRODUCTS;
 import static com.shoeshop.response.SuccessInfo.POST_ORDER;
+import static com.shoeshop.response.SuccessInfo.SUCCESS;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shoeshop.dto.CheckOutDto;
 import com.shoeshop.dto.OrderCreateDto;
 import com.shoeshop.dto.OrderDto;
+import com.shoeshop.dto.OrderItemDto;
 import com.shoeshop.exceptions.EntityNotFoundException;
 import com.shoeshop.exceptions.GlobalException;
 import com.shoeshop.order.model.ProductDto;
@@ -83,6 +85,13 @@ public class OrderController {
         return new DataResponse<>(GET_PRODUCTS, allProducts);
     }
 
+    @PostMapping("/addItem")
+    @Operation(summary = "Add item to order")
+    public DataResponse<OrderItemDto> addItemToOrder(@Valid @RequestBody OrderItemDto orderItemDto) {
+        orderItemDto = orderService.addItemToOrder(orderItemDto);
+        return new DataResponse<>(SUCCESS, orderItemDto);
+    }
+
     @PostMapping("/checkout")
     @Operation(summary = "Check out")
     public DataResponse<Boolean> checkOut(
@@ -100,6 +109,7 @@ public class OrderController {
         log.info("checkOut {}", checkOutDto);
         boolean verifyJwt = this.jwtVerifier.verifyJwt(jwt);
         log.info("jwt verify result: {}", verifyJwt);
+        // TODO: Call payment service to process payment
         return new DataResponse<>(CHECKOUT_SUCCESSFUL, true);
     }
 }
