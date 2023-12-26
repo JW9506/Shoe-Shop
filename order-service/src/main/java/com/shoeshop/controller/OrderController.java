@@ -96,10 +96,10 @@ public class OrderController {
     @Operation(summary = "Check out")
     public DataResponse<Boolean> checkOut(
         @Valid @RequestBody CheckOutDto checkOutDto,
-        @RequestHeader(name = "Authorization", required = false) String jwt) {
+        @RequestHeader(name = "Authorization", required = false) String bearer) {
 
-        if (jwt != null && jwt.startsWith("Bearer ")) {
-            jwt = jwt.substring(7); // Remove "Bearer " prefix
+        String jwt = jwtVerifier.obtainJwtFromBearer(bearer);
+        if (!jwt.isEmpty()) {
             log.info("JWT Token: {}", jwt);
         } else {
             log.info("No JWT token found in request headers");

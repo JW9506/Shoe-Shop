@@ -114,4 +114,12 @@ public class JwtVerifier {
         // Check if the current time is after the expiration time
         return expirationTime != null && currentTime.after(expirationTime);
     }
+
+    public String obtainJwtFromBearer(String bearer) {
+        String jwt = "";
+        if (bearer != null && bearer.startsWith("Bearer ")) {
+            jwt = bearer.substring(7); // Remove "Bearer " prefix
+        }
+        return jwt;
+    }
 }
