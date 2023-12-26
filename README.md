@@ -1,5 +1,7 @@
 Currently, there are 4 microservices, each has its own build.gradle to declare its dependencies. `order-service` calls `product-service` for product details.
 
+![ERD Diagram](./erd-2.jpg)
+
 Some API to ping:
 
 ```bash
