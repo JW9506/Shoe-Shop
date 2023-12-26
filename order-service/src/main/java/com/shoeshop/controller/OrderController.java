@@ -44,15 +44,6 @@ public class OrderController {
     private final ProductServiceClient productServiceClient;
     private final JwtVerifier jwtVerifier;
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Get Order by id")
-    public DataResponse<OrderDto> getOrder(@PathVariable("id") Long id) {
-        log.info("Getting order with id: {}", id);
-        OrderDto order = orderService.getOrder(id);
-        log.info("{}", order);
-        return new DataResponse<>(GET_ORDER, order);
-    }
-
     @GetMapping("/throw1")
     @Operation(summary = "Throw Test 1")
     public DataResponse<String> throwError1() {
@@ -69,6 +60,22 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/allproducts")
+    @Operation(summary = "Get All Products")
+    public DataResponse<List<ProductDto>> getProducts() {
+        List<ProductDto> allProducts = productServiceClient.getAllProducts();
+        return new DataResponse<>(GET_PRODUCTS, allProducts);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get Order by id")
+    public DataResponse<OrderDto> getOrder(@PathVariable("id") Long id) {
+        log.info("Getting order with id: {}", id);
+        OrderDto order = orderService.getOrder(id);
+        log.info("{}", order);
+        return new DataResponse<>(GET_ORDER, order);
+    }
+
     @PostMapping
     @Operation(summary = "Create Order")
     public DataResponse<OrderDto> postOrder(@Valid @RequestBody OrderCreateDto orderCreationDto) {
@@ -76,13 +83,6 @@ public class OrderController {
         OrderDto order = orderService.createOrder(orderCreationDto);
 
         return new DataResponse<>(POST_ORDER, order);
-    }
-
-    @GetMapping("/allproducts")
-    @Operation(summary = "Get All Products")
-    public DataResponse<List<ProductDto>> getProducts() {
-        List<ProductDto> allProducts = productServiceClient.getAllProducts();
-        return new DataResponse<>(GET_PRODUCTS, allProducts);
     }
 
     @PostMapping("/addItem")
