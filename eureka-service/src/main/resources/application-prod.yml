@@ -1,3 +1,7 @@
 eureka:
   server:
     enable-self-preservation: false
+spring:
+  h2:
+    console:
+      enabled: false

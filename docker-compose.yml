@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: eureka-service/Dockerfile
+    image: jwww684/eureka:latest
     networks:
       - ms-network
     ports:
@@ -13,6 +14,7 @@ services:
     build:
       context: .
       dockerfile: order-service/Dockerfile
+    image: jwww684/order:latest
     ports:
       - "8081:8081"
     networks:
@@ -24,8 +26,21 @@ services:
     build:
       context: .
       dockerfile: product-service/Dockerfile
+    image: jwww684/product:latest
     ports:
       - "8082:8082"
+    networks:
+      - ms-network
+    depends_on:
+      - eureka-service
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
+    image: jwww684/auth:latest
+    ports:
+      - "8092:8092"
     networks:
       - ms-network
     depends_on:
@@ -35,6 +50,7 @@ services:
     build:
       context: .
       dockerfile: api-gateway/Dockerfile
+    image: jwww684/api-gateway:latest
     ports:
       - "8090:8090"
     networks:
@@ -43,6 +59,7 @@ services:
       - eureka-service
       - order-service
       - product-service
+      - auth-service
 
 networks:
   ms-network:

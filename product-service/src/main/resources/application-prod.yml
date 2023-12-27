@@ -5,3 +5,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://host.docker.internal:8091/eureka/
+spring:
+  h2:
+    console:
+      enabled: false
