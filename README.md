@@ -86,7 +86,32 @@ View the project in minified view:
 |   |           `-- application.yml
 |   |-- Dockerfile
 |   `-- build.gradle
+|-- auth-service
+|   |-- src
+|   |   `-- main
+|   |       |-- java
+|   |       |   `-- com
+|   |       |       `-- shoeshop
+|   |       |           |-- config
+|   |       |           |   |-- AuthPartyProperties.java
+|   |       |           |   `-- WebConfig.java
+|   |       |           |-- controller
+|   |       |           |   `-- AuthController.java
+|   |       |           |-- dto
+|   |       |           |   `-- AuthResponseDto.java
+|   |       |           |-- response
+|   |       |           |   |-- BaseResponse.java
+|   |       |           |   |-- DataResponse.java
+|   |       |           |   |-- FailureInfo.java
+|   |       |           |   `-- SuccessInfo.java
+|   |       |           `-- AuthApp.java
+|   |       `-- resources
+|   |           |-- application-prod.yml
+|   |           `-- application.yml
+|   |-- Dockerfile
+|   `-- build.gradle
 |-- eureka-service
+|   |-- bin
 |   |-- src
 |   |   `-- main
 |   |       |-- java
@@ -104,12 +129,24 @@ View the project in minified view:
 |       |   |-- app
 |       |   |   |-- core
 |       |   |   |   |-- network
+|       |   |   |   |   |-- AuthInterceptor.ts
 |       |   |   |   |   `-- Interceptor.ts
 |       |   |   |   |-- service
-|       |   |   |   |   `-- LoadingService.ts
+|       |   |   |   |   |-- AuthService.ts
+|       |   |   |   |   |-- LoadingService.ts
+|       |   |   |   |   `-- TokenService.ts
 |       |   |   |   `-- store
-|       |   |   |       `-- category.store.ts
+|       |   |   |       |-- cart.store.ts
+|       |   |   |       |-- category.store.ts
+|       |   |   |       `-- login.store.ts
 |       |   |   |-- feature
+|       |   |   |   |-- cart
+|       |   |   |   |   `-- components
+|       |   |   |   |       `-- cart
+|       |   |   |   |           |-- cart.component.html
+|       |   |   |   |           |-- cart.component.scss
+|       |   |   |   |           |-- cart.component.spec.ts
+|       |   |   |   |           `-- cart.component.ts
 |       |   |   |   |-- category-list
 |       |   |   |   |   |-- components
 |       |   |   |   |   |   |-- category-item
@@ -123,6 +160,7 @@ View the project in minified view:
 |       |   |   |   |   |   |   |-- category-list.component.spec.ts
 |       |   |   |   |   |   |   `-- category-list.component.ts
 |       |   |   |   |   |   `-- interfaces
+|       |   |   |   |   |       |-- CartProduct.ts
 |       |   |   |   |   |       |-- CategoryNode.ts
 |       |   |   |   |   |       `-- Product.ts
 |       |   |   |   |   |-- services
@@ -147,8 +185,29 @@ View the project in minified view:
 |       |   |   |       |   `-- product.service.ts
 |       |   |   |       |-- product-list-routing.module.ts
 |       |   |   |       `-- product-list.module.ts
+|       |   |   |-- pages
+|       |   |   |   |-- cart
+|       |   |   |   |   |-- cart.page.component.html
+|       |   |   |   |   |-- cart.page.component.scss
+|       |   |   |   |   |-- cart.page.component.spec.ts
+|       |   |   |   |   `-- cart.page.component.ts
+|       |   |   |   |-- home
+|       |   |   |   |   |-- home.component.html
+|       |   |   |   |   |-- home.component.scss
+|       |   |   |   |   |-- home.component.spec.ts
+|       |   |   |   |   `-- home.component.ts
+|       |   |   |   `-- login
+|       |   |   |       |-- login.component.html
+|       |   |   |       |-- login.component.scss
+|       |   |   |       |-- login.component.spec.ts
+|       |   |   |       `-- login.component.ts
 |       |   |   |-- shared
 |       |   |   |   |-- components
+|       |   |   |   |   |-- header
+|       |   |   |   |   |   |-- header.component.html
+|       |   |   |   |   |   |-- header.component.scss
+|       |   |   |   |   |   |-- header.component.spec.ts
+|       |   |   |   |   |   `-- header.component.ts
 |       |   |   |   |   `-- loading
 |       |   |   |   |       |-- loading.component.html
 |       |   |   |   |       |-- loading.component.scss
@@ -189,24 +248,24 @@ View the project in minified view:
 |   |       |   `-- com
 |   |       |       `-- shoeshop
 |   |       |           |-- config
+|   |       |           |   |-- AppConfig.java
 |   |       |           |   |-- CurrentEnvironment.java
-|   |       |           |   `-- ProductServiceEndpointProperties.java
+|   |       |           |   |-- ProductServiceEndpointProperties.java
+|   |       |           |   `-- WebConfig.java
 |   |       |           |-- controller
-|   |       |           |   |-- CartController.java
 |   |       |           |   |-- CustomerController.java
 |   |       |           |   `-- OrderController.java
 |   |       |           |-- dto
-|   |       |           |   |-- CartCreateDto.java
-|   |       |           |   |-- CartDto.java
-|   |       |           |   |-- CartItemDto.java
+|   |       |           |   |-- CheckOutDto.java
 |   |       |           |   |-- CustomerDto.java
 |   |       |           |   |-- OrderCreateDto.java
-|   |       |           |   `-- OrderDto.java
+|   |       |           |   |-- OrderDto.java
+|   |       |           |   |-- OrderItemDto.java
+|   |       |           |   `-- ProductItemDto.java
 |   |       |           |-- entity
-|   |       |           |   |-- Cart.java
-|   |       |           |   |-- CartItem.java
 |   |       |           |   |-- Customer.java
-|   |       |           |   `-- Order.java
+|   |       |           |   |-- Order.java
+|   |       |           |   `-- OrderItem.java
 |   |       |           |-- enums
 |   |       |           |   `-- PaymentStatus.java
 |   |       |           |-- exceptions
@@ -214,9 +273,8 @@ View the project in minified view:
 |   |       |           |   |-- ExceptionAdvice.java
 |   |       |           |   `-- GlobalException.java
 |   |       |           |-- repository
-|   |       |           |   |-- CartItemRepository.java
-|   |       |           |   |-- CartRepository.java
 |   |       |           |   |-- CustomerRepository.java
+|   |       |           |   |-- OrderItemRepository.java
 |   |       |           |   `-- OrderRepository.java
 |   |       |           |-- response
 |   |       |           |   |-- APIResponseWrapperForJsonParsing.java
@@ -225,10 +283,11 @@ View the project in minified view:
 |   |       |           |   |-- FailureInfo.java
 |   |       |           |   `-- SuccessInfo.java
 |   |       |           |-- service
-|   |       |           |   |-- CartService.java
 |   |       |           |   |-- CustomerService.java
 |   |       |           |   |-- OrderService.java
 |   |       |           |   `-- ProductServiceClient.java
+|   |       |           |-- util
+|   |       |           |   `-- JwtVerifier.java
 |   |       |           |-- AuditEntity.java
 |   |       |           `-- OrderApp.java
 |   |       `-- resources
@@ -280,13 +339,19 @@ View the project in minified view:
 |   |-- Dockerfile
 |   `-- build.gradle
 |-- README.md
+|-- authentication-sequence.png
 |-- build.gradle
 |-- docker-compose.yml
+|-- erd-1.jpg
+|-- erd-2.jpg
 |-- gradlew
 |-- gradlew.bat
 |-- settings.gradle
 `-- this.code-workspace
 
-78 directories, 147 files
+99 directories, 188 files
 
 ```
+![Screenshot 1](./screenshot_1.jpg)
+![Screenshot 2](./screenshot_2.jpg)
+![Screenshot 3](./screenshot_3.jpg)
