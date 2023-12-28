@@ -57,7 +57,7 @@ Key highlight:
 
 - `Get /api/order/allproducts` fetches from the `product-service` module, using eureka for client discovery and HttpClient to make Http Get request for all products, show casing cross module communication.
 
-- Exception Advice intercepts exceptions and return unified data response format to the caller. [AdviceException](./order-service/src/main/java/com/shoeshop/exceptions/ExceptionAdvice.java)
+- Exception Advice intercepts exceptions thrown from the application level and return unified data response format to the caller. [AdviceException](./order-service/src/main/java/com/shoeshop/exceptions/ExceptionAdvice.java)
 
 View the project in minified view:
 
