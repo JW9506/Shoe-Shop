@@ -6,6 +6,7 @@ Currently, there are 4 microservices, each has its own build.gradle to declare i
 - eureka-service: 8091
 - auth-service: 8092
 
+(Work In Progress)
 ![ERD Diagram](./erd-2.jpg)
 
 Some API to ping:
