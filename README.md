@@ -1,10 +1,10 @@
 Currently, there are 4 microservices, each has its own build.gradle to declare its dependencies. `order-service` calls `product-service` for product details.
 
-order-service: 8081
-product-service: 8082
-api-gateway: 8090
-eureka-service: 8091
-auth-service: 8092
+- order-service: 8081
+- product-service: 8082
+- api-gateway: 8090
+- eureka-service: 8091
+- auth-service: 8092
 
 ![ERD Diagram](./erd-2.jpg)
 
