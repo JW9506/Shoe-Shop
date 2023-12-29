@@ -3,6 +3,11 @@
 ## Project Overview
 This project simulates a microservices architecture using Spring Boot 3 and Java 17, designed to model a scalable and robust system. It demonstrates the latest features and best practices for building microservices with these technologies.
 
+### Todo
+- Modules should stay behind API Gateway.
+- Frontend should interact with API Gateway.
+- Finish Checkout feature.
+
 ### Microservices Architecture
 - **Order Service**: Manages customer orders. (Port: 8081)
 - **Product Service**: Handles product details. (Port: 8082)
