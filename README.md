@@ -5,6 +5,7 @@ This project simulates a microservices architecture using Spring Boot 3 and Java
 
 ### Todo
 - Modules should stay behind API Gateway.
+- Upgrade DB from in-memory H2 to actual remote DB.
 - Frontend should interact with API Gateway.
 - Finish Checkout feature.
 
