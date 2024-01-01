@@ -3,6 +3,12 @@
 ## Project Overview
 This project simulates a microservices architecture using Spring Boot 3 and Java 17, designed to model a scalable and robust system. It demonstrates the latest features and best practices for building microservices with these technologies.
 
+## Key Features and Highlights
+- Description of key features like cross-module communication (`Get /api/order/allproducts`)
+- Unified exception handling with Exception Advice.
+- The Category table self-joins, product can being to one category and subcategory at a time.
+- Selecting a category returns all products that belong to that category or the sub-categories.
+
 ### Todo
 - Modules should stay behind API Gateway.
 - Upgrade DB from in-memory H2 to actual remote DB.
@@ -61,10 +67,6 @@ Get /api/categories
 Get /api/categories/hierarchical
 Get /api/categories/{categoryId}/products
 ```
-
-## Key Features and Highlights
-- Description of key features like cross-module communication (`Get /api/order/allproducts`)
-- Unified exception handling with Exception Advice.
 
 ## Code Structure
 Minified view of the project's directory and file structure, highlighting key components in each microservice.
