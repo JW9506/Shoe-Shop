@@ -14,6 +14,7 @@ This project simulates a microservices architecture using Spring Boot 3 and Java
 - Upgrade DB from in-memory H2 to actual remote DB.
 - Frontend should interact with API Gateway.
 - There should be an inventory module, to which the order-module will call, using Eureka.
+- There should be a billing module, which, using RabbitMQ, would subscribe to new order events from the order module.
 - Finish Checkout feature.
 
 ### Microservices Architecture
