@@ -1,34 +1,33 @@
-# Shoe-Shop Project README
+# Shoe-Shop Project
 
-## Project Overview
-This project simulates a microservices architecture using Spring Boot 3 and Java 17, designed to model a scalable and robust system. It demonstrates the latest features and best practices for building microservices with these technologies.
+## Overview of Project
+This document serves as the technical documentation for the Shoe-Shop Project. The project is developed using Spring Boot 3 and Java 17, providing a simulation of a microservices architecture. It is intended to exemplify a scalable, robust system using current best practices in microservices development.
 
-## Key Features and Highlights
-- Description of key features like cross-module communication (`Get /api/order/allproducts`)
-- Unified exception handling with Exception Advice.
-- The Category table self-joins, product can being to one category and subcategory at a time.
-- Selecting a category returns all products that belong to that category or the sub-categories.
+## Functional Specifications
+- **Cross-Module Communication**: The project demonstrates cross-module communication with features such as `Get /api/order/allproducts`.
+- **Exception Handling**: Implements a unified approach to exception handling across services.
+- **Database Design**: The Category table features a self-join, allowing a product to belong to a primary category and a subcategory simultaneously. Selecting a category returns all related products.
 
-### Todo
-- Modules should stay behind API Gateway.
-- Upgrade DB from in-memory H2 to actual remote DB.
-- Frontend should interact with API Gateway.
-- There should be an inventory module, to which the order-module will call, using Eureka.
-- There should be a billing module, which, using RabbitMQ, would subscribe to new order events from the order module.
-- Finish Checkout feature.
+### Future Development Objectives
+- **API Gateway Integration**: Implementing an API Gateway for module interactions.
+- **Database Upgrade**: Transitioning from an in-memory H2 database to a remote database system.
+- **Frontend and API Gateway Interaction**: Enabling the frontend to interact with the API Gateway.
+- **Inventory Module Implementation**: Adding an inventory module with Eureka integration for order processing.
+- **Billing Module Integration**: Incorporating a billing module subscribing to new order events via RabbitMQ.
+- **Checkout Feature Completion**: Finalizing the checkout functionality.
 
 ### Microservices Architecture
-- **Order Service**: Manages customer orders. (Port: 8081)
-- **Product Service**: Handles product details. (Port: 8082)
-- **API Gateway**: Central entry point for microservices. (Port: 8090)
-- **Eureka Service**: Service registry for discovering microservices. (Port: 8091)
-- **Auth Service**: Manages user authentication. (Port: 8092)
+- **Order Service**: Port 8081 - Manages customer orders.
+- **Product Service**: Port 8082 - Manages product details.
+- **API Gateway**: Port 8090 - Serves as the central entry point.
+- **Eureka Service**: Port 8091 - Provides service discovery.
+- **Auth Service**: Port 8092 - Handles user authentication.
 
-### Inter-service Communication
-Details on how `order-service` communicates with `product-service` for product information.
+### Inter-Service Communication
+- Details regarding the interaction between `order-service` and `product-service` for product information retrieval.
 
 ## Project Setup
-Instructions for setting up the project, including details on individual `build.gradle` files for each microservice.
+- Just import the project into IntelliJ, or VSCode
 
 ## API Endpoints
 Overview of the available API endpoints.
@@ -193,6 +192,3 @@ Minified view of the project's directory and file structure, highlighting key co
 ![Screenshot 1](./screenshot_1.jpg)
 ![Screenshot 2](./screenshot_2.jpg)
 ![Screenshot 3](./screenshot_3.jpg)
-
-## Additional Documentation
-- Links to comprehensive API documentation, such as Swagger (`<service>/v3/api-docs`).
