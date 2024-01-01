@@ -63,7 +63,8 @@ Get /api/categories/{categoryId}/products
 ```
 
 ## Key Features and Highlights
-- Description of key features like cross-module communication (`Get /api/order/allproducts`) and unified exception handling with Exception Advice.
+- Description of key features like cross-module communication (`Get /api/order/allproducts`)
+- Unified exception handling with Exception Advice.
 
 ## Code Structure
 Minified view of the project's directory and file structure, highlighting key components in each microservice.
