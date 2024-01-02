@@ -19,6 +19,7 @@ This document serves as the technical documentation for the Shoe-Shop Project. T
 ### Microservices Architecture
 - **Order Service**: Port 8081 - Manages customer orders.
 - **Product Service**: Port 8082 - Manages product details.
+- **Inventory Service**: Port 8083 - Manages inventory details.
 - **API Gateway**: Port 8090 - Serves as the central entry point.
 - **Eureka Service**: Port 8091 - Provides service discovery.
 - **Auth Service**: Port 8092 - Handles user authentication.

@@ -1,0 +1,11 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    nonSecurePort: 8092
+  client:
+    serviceUrl:
+      defaultZone: http://host.docker.internal:8091/eureka/
+spring:
+  h2:
+    console:
+      enabled: false
