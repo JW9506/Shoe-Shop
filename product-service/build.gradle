@@ -35,6 +35,29 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
+// OpenAPI Generator configuration
+openApiGenerate {
+    generatorName = 'java'
+    inputSpec = "$projectDir/src/main/resources/inventory-service-api.json"  // URL of your inventory-service's OpenAPI spec
+    outputDir = "$buildDir/generated-sources/openapi"
+    apiPackage = 'com.shoeshop.product.api'  // Package for API classes
+    modelPackage = 'com.shoeshop.product.model'  // Package for model classes
+    invokerPackage = 'com.shoeshop.product.invoker'  // Package for invoker classes
+    configOptions = [
+        dateLibrary: 'java8'  // Use java8 date types
+    ]
+}
+
+compileJava.dependsOn tasks.named("openApiGenerate")
+
+sourceSets {
+    main {
+        java {
+            srcDir "$buildDir/generated-sources/openapi/src/main/java"
+        }
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }

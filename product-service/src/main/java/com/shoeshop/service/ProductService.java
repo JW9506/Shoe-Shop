@@ -2,22 +2,30 @@ package com.shoeshop.service;
 
 import static com.shoeshop.response.FailureInfo.INVALID_INPUT;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 import com.shoeshop.dto.ProductCreateDto;
 import com.shoeshop.dto.ProductDto;
 import com.shoeshop.entity.Category;
 import com.shoeshop.entity.Product;
 import com.shoeshop.exceptions.EntityNotFoundException;
+import com.shoeshop.product.model.SkuDto;
 import com.shoeshop.repository.CategoryRepository;
 import com.shoeshop.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
+    private Map<String, SkuDto> skuMap = new ConcurrentHashMap<>();
 
     public ProductDto createProduct(ProductCreateDto productCreateDto) {
         Category category = categoryRepository.getReferenceById(productCreateDto.getCategoryId());
