@@ -25,7 +25,7 @@ This document serves as the technical documentation for the Shoe-Shop Project. T
 - **Auth Service**: Port 8092 - Handles user authentication.
 
 ### Inter-Service Communication
-- Details regarding the interaction between `order-service` and `product-service` for product information retrieval.
+- [See ProductServiceClient in order-service](./order-service/src/main/java/com/shoeshop/service/ProductServiceClient.java)
 
 ## Project Setup
 - Just import the project into IntelliJ, or VSCode
