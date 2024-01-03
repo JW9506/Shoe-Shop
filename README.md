@@ -28,6 +28,7 @@ This document serves as the technical documentation for the Shoe-Shop Project. T
 - [See ProductServiceClient in order-service](./order-service/src/main/java/com/shoeshop/service/ProductServiceClient.java)
 
 ## Project Setup
+- The `auth-service` reads from environment variable `GOOGLE_OAUTH_CLIENT_ID` and `GOOGLE_OAUTH_CLIENT_SECRET`, see [auth-service application.yml](./auth-service/src/main/resources/application.yml), be sure to get them ready before spinning up `auth-service`.
 - Just import the project into IntelliJ, or VSCode
 
 ## API Endpoints
