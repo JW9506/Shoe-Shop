@@ -11,6 +11,7 @@ import { CategoryStore } from 'src/app/core/store/category.store';
 export class ProductListComponent {
 
   products$ = this.categoryStore.select(state => state.products);
+  currentCategory$ = this.categoryStore.select(state => state.currentCategory);
   // products$ = of([
   //   {
   //     description: 'description',

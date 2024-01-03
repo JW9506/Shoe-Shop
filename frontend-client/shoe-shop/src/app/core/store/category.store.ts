@@ -6,13 +6,27 @@ import { Product } from '../../feature/category-list/components/interfaces/Produ
 export interface CategoryState {
   categories: CategoryNode[];
   products: Product[];
+  categoryIdMap: Record<number, CategoryNode>;
+  currentCategory: CategoryNode | null;
 }
 
 @Injectable({ providedIn: 'root' })
 export class CategoryStore extends ComponentStore<CategoryState> {
   constructor() {
-    super({ categories: [], products: [] });
+    super({ categories: [], products: [], categoryIdMap: {}, currentCategory: null });
   }
+
+  readonly setCategoryIdMap = this.updater((state, categoryIdMap: Record<number, CategoryNode>) => (
+    {
+      ...state,
+      categoryIdMap
+    }
+  ));
+
+  readonly setCurrentCategory = this.updater((state, currentCategory: CategoryNode) => ({
+    ...state,
+    currentCategory
+  }));
 
   readonly setCategories = this.updater((state, categories: CategoryNode[]) => ({
     ...state,

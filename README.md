@@ -194,3 +194,7 @@ Minified view of the project's directory and file structure, highlighting key co
 ![Screenshot 1](./screenshot_1.jpg)
 ![Screenshot 2](./screenshot_2.jpg)
 ![Screenshot 3](./screenshot_3.jpg)
+### Update 01/02/2014
+Render the currently selected category above the product items.
+![Screenshot 4](./screenshot_4.jpg)
+![Screenshot 5](./screenshot_5.jpg)
