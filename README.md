@@ -15,6 +15,7 @@ This document serves as the technical documentation for the Shoe-Shop Project. T
 - **Inventory Module Implementation**: Adding an inventory module with Eureka integration for order processing.
 - **Billing Module Integration**: Incorporating a billing module subscribing to new order events via RabbitMQ.
 - **Checkout Feature Completion**: Finalizing the checkout functionality.
+- **Promo Code**: Validate promo code against backend permitted values.
 
 ### Microservices Architecture
 - **Order Service**: Port 8081 - Manages customer orders.
